@@ -1,0 +1,112 @@
+<div class="container">
+
+    <div class="image">
+      <div class="initSession">Iniciar sesión</div>
+      <p class="paragraph">
+        Nos alegra tenerte de vuelta y estamos listos para atender tus necesidades. 
+        Inicia sesión y continúa aprovechando al máximo nuestra plataforma.
+      </p>
+      <div class="wrapper">
+        <div class="monitoring">
+          <img src="/login/MonitoreoIntegral.png" alt="Monitor icon">
+        </div>
+        <div class="notification">
+          <img src="/login/NotificacionesEnTiempoReal.png" alt="Notification icon">
+        </div>
+      </div>
+    </div>
+
+    <div class="login">
+      <div class="logContainer">
+        <div class="portal">Portal de monitoreo</div>
+        <div class="isesion">
+          <div class="isesiontext">Iniciar sesión</div>
+        </div>
+      </div>
+
+      <form>
+        <div class="containerInput">
+          <div class="inputEmail">
+            <input type="email" class="form-control" placeholder="Email">
+            <label class="form-label">Email</label>
+          </div>
+
+          <div class="inputPassword">
+            <input [type]="showPassword ? 'text' : 'password'" 
+                  class="form-control" 
+                  placeholder="Contraseña">
+            <label class="form-label">Contraseña</label>
+            <svg class="eye-icon" 
+                viewBox="0 0 18 12" 
+                xmlns="http://www.w3.org/2000/svg" 
+                (click)="togglePasswordVisibility()">
+              <path d="M9 0C4.91 0 1.44 2.38 0 6C1.44 9.62 4.91 12 9 12C13.09 12 16.56 9.62 18 6C16.56 2.38 13.09 0 9 0ZM9 10C6.79 10 5 8.21 5 6C5 3.79 6.79 2 9 2C11.21 2 13 3.79 13 6C13 8.21 11.21 10 9 10ZM9 3.5C7.62 3.5 6.5 4.62 6.5 6C6.5 7.38 7.62 8.5 9 8.5C10.38 8.5 11.5 7.38 11.5 6C11.5 4.62 10.38 3.5 9 3.5Z" />
+            </svg>
+          </div>
+
+          <div class="containerButton">
+            <div class="forgotPassword">
+              ¿Olvidaste tu contraseña?
+            </div>
+            <button type="submit" class="loginButton">
+              Iniciar sesión
+            </button>
+          </div>
+        </div>
+      </form>
+      
+      <div class="reCaptcha">
+        Protegido por reCAPTCHA y sujeto a la 
+        <span class="highlight">Política de Privacidad</span> y 
+        <span class="highlight">Condiciones</span>.
+      </div>
+      <div class="nonAcount">
+        No tienes una cuenta? 
+        <span class="highlightt">Regístrate</span>
+    </div>
+</div>    
+</div>
+
+<div class="login-small">
+  <div class="login-small-header">
+      <div class="login-small-logo">
+          <div class="logo-placeholder"></div>
+      </div>
+  </div>
+  
+  <div class="login-small-content">
+      <h1 class="login-small-title">Iniciar sesión</h1>
+      
+      <form class="login-small-form">
+          <div class="login-small-input">
+              <label for="email">Email</label>
+              <input 
+                  type="email" 
+                  id="email" 
+                  placeholder="Ingresa tu correo electrónico"
+              >
+          </div>
+          
+          <div class="login-small-input">
+              <label for="password">Contraseña</label>
+              <div class="password-input-container">
+                  <input 
+                      type="password" 
+                      id="password" 
+                      placeholder="Ingresa tu contraseña"
+                  >
+                  <svg class="eye-icon" 
+                viewBox="0 0 18 12" 
+                xmlns="http://www.w3.org/2000/svg" 
+                (click)="togglePasswordVisibility()">
+              <path d="M9 0C4.91 0 1.44 2.38 0 6C1.44 9.62 4.91 12 9 12C13.09 12 16.56 9.62 18 6C16.56 2.38 13.09 0 9 0ZM9 10C6.79 10 5 8.21 5 6C5 3.79 6.79 2 9 2C11.21 2 13 3.79 13 6C13 8.21 11.21 10 9 10ZM9 3.5C7.62 3.5 6.5 4.62 6.5 6C6.5 7.38 7.62 8.5 9 8.5C10.38 8.5 11.5 7.38 11.5 6C11.5 4.62 10.38 3.5 9 3.5Z" />
+            </svg>
+              </div>
+          </div>
+          
+          <button type="submit" class="login-small-button">
+              Ingresar
+          </button>
+      </form>
+  </div>
+</div>
