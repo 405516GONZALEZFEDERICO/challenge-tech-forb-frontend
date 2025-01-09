@@ -538,7 +538,7 @@ form {
     object-fit: contain;
 }
 
-/* Update the login-small-header to better match the design */
+
 .login-small-header {
     width: 100%;
     display: flex;
@@ -548,15 +548,6 @@ form {
     padding-top: 24px;
 }
 
-/* @media screen and (max-width: 480px) {
-    .container {
-        display: none !important;
-    }
-
-    .login-small {
-        display: block !important;
-    }
-} */
 
 
 
@@ -791,4 +782,3 @@ form {
     display: block;
 }
 
-/* Mobile error styles */
