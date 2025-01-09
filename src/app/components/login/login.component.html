@@ -1,5 +1,4 @@
 <div class="container">
-
     <div class="image">
       <div class="initSession">Iniciar sesión</div>
       <p class="paragraph">
@@ -24,17 +23,26 @@
         </div>
       </div>
 
-      <form>
+      <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="containerInput">
+          
           <div class="inputEmail">
-            <input type="email" class="form-control" placeholder="Email">
+            <input type="email" class="form-control" placeholder="Email" formControlName="email" 
+            [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}">
             <label class="form-label">Email</label>
+            <div class="invalid-feedback">
+              @if (loginForm.get('email')?.errors?.['required']) {
+              <span>El email es requerido</span>
+              }
+              @if (loginForm.get('email')?.errors?.['email']) {
+              <span>Ingresa un email valido</span>
+              }
+            </div>
           </div>
-
+          
           <div class="inputPassword">
-            <input [type]="showPassword ? 'text' : 'password'" 
-                  class="form-control" 
-                  placeholder="Contraseña">
+            <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Contraseña" formControlName="password"
+            [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}">
             <label class="form-label">Contraseña</label>
             <svg class="eye-icon" 
                 viewBox="0 0 18 12" 
@@ -42,7 +50,20 @@
                 (click)="togglePasswordVisibility()">
               <path d="M9 0C4.91 0 1.44 2.38 0 6C1.44 9.62 4.91 12 9 12C13.09 12 16.56 9.62 18 6C16.56 2.38 13.09 0 9 0ZM9 10C6.79 10 5 8.21 5 6C5 3.79 6.79 2 9 2C11.21 2 13 3.79 13 6C13 8.21 11.21 10 9 10ZM9 3.5C7.62 3.5 6.5 4.62 6.5 6C6.5 7.38 7.62 8.5 9 8.5C10.38 8.5 11.5 7.38 11.5 6C11.5 4.62 10.38 3.5 9 3.5Z" />
             </svg>
+            <div class="invalid-feedback">
+              @if (loginForm.get('password')?.errors?.['required']) {
+              <span>La contraseña es requerida</span>
+              }
+              @if (loginForm.get('password')?.errors?.['minlength']) {
+              <span>Ingresa una contraseña de al menos 8 caracteres</span>
+              }
+              @if (loginForm.get('password')?.errors?.['maxlength']) {
+                <span>Ingresa una contraseña maxima de 10 caracteres</span>
+              }
+            </div>
           </div>
+
+       
 
           <div class="containerButton">
             <div class="forgotPassword">
@@ -78,22 +99,27 @@
       <h1 class="login-small-title">Iniciar sesión</h1>
       
       <form class="login-small-form">
+        <div class="container-input-smail">
+
+        </div>
           <div class="login-small-input">
-              <label for="email">Email</label>
+              <label for="email" class="email-small-text" class="text-email-small">Email</label>
               <input 
                   type="email" 
                   id="email" 
                   placeholder="Ingresa tu correo electrónico"
+                  class="email-small-input"
               >
           </div>
           
           <div class="login-small-input">
-              <label for="password">Contraseña</label>
+              <label for="password" class="pass-small-text">Contraseña</label>
               <div class="password-input-container">
                   <input 
                       type="password" 
                       id="password" 
                       placeholder="Ingresa tu contraseña"
+                      class="password-small-input"
                   >
                   <svg class="eye-icon" 
                 viewBox="0 0 18 12" 
@@ -104,9 +130,10 @@
               </div>
           </div>
           
-          <button type="submit" class="login-small-button">
+          <button type="submit"class="btn-small-login">
               Ingresar
           </button>
+          
       </form>
   </div>
 </div>
