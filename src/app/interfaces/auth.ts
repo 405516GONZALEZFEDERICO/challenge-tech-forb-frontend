@@ -1,15 +1,16 @@
 export interface LoginUserDto {
-    username: string;
+    email: string;
     password: string;
 }
 
 export interface RegisterUserDto {
-    username: string;
+    name: string;
     password: string;
     email: string;
+    urlImg:string;
 }
 
 export interface TokenResponseDto {
-    token: string;
-    refreshToken: string;
+    access_token: string;
+    refresh_token: string;
 }
