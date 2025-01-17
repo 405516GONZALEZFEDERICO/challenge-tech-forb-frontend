@@ -1,0 +1,221 @@
+
+
+
+
+
+
+.overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+  
+  
+  .popup {
+    margin-left: 150px;
+    border-radius: 15px;
+    padding: 30px;
+    width: 380px;
+    height: 300px;
+    opacity: 1;
+    background-color: white;
+  }
+  
+  .popup-title {
+    width: 138px;
+    height: 21px;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: left;
+    color: #000000;
+    z-index: 1001;
+  }
+  
+  .input-group input,
+  .input-group select {
+    width: 100%;
+    height: 42px;
+    border-radius: 7.43px;
+    border: 0.93px solid #C6C9D2;
+    padding-left: 20px;
+    padding-right: 30px;
+    color: #BABEC5;
+  
+  
+  }
+  
+  
+  .name-plant {
+    margin-bottom: 16px;
+    position: relative;
+  
+  }
+  
+  
+  .label-txt {
+    display: block;
+    margin-bottom: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: left;
+  }
+  
+  
+  
+  
+  
+  .input-group input.input-name-plant {
+    width: 86%;
+  }
+  
+  
+  .button-group {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 35px;
+    margin-left: 85px;
+    margin-right: 85px;
+  }
+  
+  .cancel-btn,
+  .create-btn {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .cancel-btn {
+    border: 1px solid #33A3AA;
+    color: #33A3AA;
+    background-color: white;
+    width: 100px;
+    height: 36px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+  
+  }
+  
+  .create-btn {
+    background-color: #33A3AA;
+    color: white;
+    width: 100px;
+    height: 36px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+  
+  }
+  
+  
+  
+  
+  .invalid-feedback {
+    display: none;
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 8px;
+    margin-left: 16px;
+    font-family: 'PP Neue Montreal', sans-serif;
+  
+  }
+  
+  
+  .name-plant input.ng-invalid.ng-touched+.invalid-feedback,
+  .name-plant select.ng-invalid.ng-touched+.invalid-feedback {
+    display: block;
+  }
+  
+  
+  input::placeholder,
+  select::placeholder {
+    color: #BABEC5;
+    opacity: 1;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /* 
+    @media screen and (max-width: 393px) {
+      .main-content {
+        margin-left: 0;
+        display: none;
+      }
+  
+      .container {
+        width: 100%;
+        padding: 0;
+      }
+    }
+  
+  } */
+  
