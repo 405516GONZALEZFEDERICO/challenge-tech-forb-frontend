@@ -1,0 +1,258 @@
+    .ring {
+        width: 26.28px;
+        height: 26.28px;
+        top: 0.91px;
+        left: 1.81px;
+        gap: 0px;
+        opacity: 1;
+        display: none;
+    }
+
+    .world {
+        width: 24px;
+        left: 28px;
+        gap: 0px;
+        opacity: 0px;
+
+    }
+
+    .camera {
+        width: 24px;
+        height: 15px;
+        top: 192px;
+        left: 28px;
+        gap: 0px;
+        opacity: 0px;
+
+    }
+
+    .sensor {
+        width: 22px;
+        height: 16.97px;
+        top: 249px;
+        left: 29px;
+        gap: 0px;
+        opacity: 0px;
+
+    }
+
+    .logOut {
+        width: 18px;
+    }
+
+    .hamburger {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        position: fixed;
+        left: 20px;
+        top: 20px;
+        z-index: 999;
+    }
+
+    .navbar {
+        display: block;
+        width: 80px;
+        height: 900px;
+        background-color: #FFFFFF;
+        color: white;
+        position: fixed;
+        transition: all 0.3s ease;
+    }
+
+    .container-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    .logo-main {
+        margin-bottom: 50px;
+        width: 36px;
+        height: 32.61px;
+    }
+
+    
+.nav-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    list-style: none;
+    padding: 0;
+    margin: 0; /* Añadido para eliminar margen por defecto */
+}
+.nav-list li {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0 10px; /* Añadido para dar espacio a los lados */
+}
+
+
+    .nav-list li:hover svg path,
+    .nav-list li:hover svg line {
+        fill: #000000;
+        stroke: #000000;
+    }
+
+    .logOut {
+        width: 18px;
+    }
+
+
+
+    .logo-nav-bar {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        width: 81px;
+        height: 66.75px;
+        top: 26px;
+        left: 162px;
+        gap: 0px;
+        opacity: 1;
+        background-color: #D9D9D9;
+    }
+
+
+    .container-navbar-hamburguesa {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 10px 20px;
+        z-index: 998;
+        background-color: #FFFFFF;
+        height: 60px;
+    }
+    .container-navbar-hamburguesa {
+        display: none;
+    }
+
+    .main-content {
+        flex: 1;
+        background-color: #ffff;
+        color: black;
+        margin-left: 80px;
+    }
+
+
+    @media screen and (max-width: 393px) {
+        .navbar {
+            display: block;
+            width: 0;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            overflow: hidden;
+            padding-top: 80px; 
+        }
+        .container-logo {
+            display: none;
+        }
+
+        .navbar.navbar-mobile {
+            width: 100%;
+        }
+
+    
+
+        .container-navbar-hamburguesa {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 10px 20px;
+            z-index: 998;
+            background-color: #FFFFFF;
+            height: 60px;
+        }
+
+
+
+        .nav-list {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+            width: 100%;
+            align-items: center;
+            padding: 0;
+        }
+
+        .nav-list li {
+            width: auto; /* Cambiado para centrar mejor los items */
+            padding: 10px 0; /* Espaciado vertical */
+        }
+    
+        .logo-nav-bar {
+            display: block;
+            width: 81px;
+            height: 66.75px;
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #D9D9D9;
+            z-index: 999; /* Asegura que esté por encima del navbar pero debajo del hamburger */
+        }
+
+
+        .hamburger {
+            display: block;
+            position: fixed;
+            top: 25px;
+            z-index: 1001;
+            margin-right: -500px;
+        }
+       
+        .navbar {
+            padding-top: 60px;
+        }
+
+
+        .nav-list {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        .ring {
+            left: 20px;
+            margin-top: 18px;
+            padding-right: 100px;
+            display: flex;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            margin-left: 310px;
+            width: 29px;
+            height: 29px;
+            margin-bottom: 16px;
+        }
+
+        .ring.svg {
+            fill: #000000;
+            stroke: #000000;
+        }
+        .nav-list.nav-list-mobile {
+            opacity: 1;
+            visibility: visible;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 60px;
+            height: 100vh;
+        }
+    }
