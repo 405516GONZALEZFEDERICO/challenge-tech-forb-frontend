@@ -2,7 +2,7 @@ import { Component, HostListener, inject, OnDestroy, OnInit } from '@angular/cor
 import { AuthService } from '../../../services/login-service/auth.service';
 import { NavbarComponent } from "../../navbar/navbar/navbar.component";
 import { DashboardService } from '../../../services/dashboard/dashboard.service';
-import { CountryEnvironmentalData, GetPlantFlagDto, Plant } from '../../../interfaces/dasboard';
+import { CountryEnvironmentalData, GetPlantFlagDto, Plant, UpdatePlantDto } from '../../../interfaces/dasboard';
 import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -12,70 +12,158 @@ import { CommonModule } from '@angular/common';
     standalone: true,
     imports: [NavbarComponent, ReactiveFormsModule, CommonModule],
     templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.css','./dashboard2.component.css'] 
+    styleUrls: ['./dashboard.component.css', './dashboard2.component.css']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
     private dashboardService = inject(DashboardService);
     private authService = inject(AuthService);
+
     plants?: GetPlantFlagDto[];
+    metrics?: CountryEnvironmentalData[] = [];
     private subscriptions: Subscription[] = [];
+
     clectures: number = 0;
     cmedAlerts: number = 0;
     credAlerts: number = 0;
     csensorsDisabled: number = 0;
-    isDropdownOpen: any;
+
     userName: string = '';
     activeDropdownIndex: number | null = null;
-    metrics?: CountryEnvironmentalData[] = [];
     selectedCountryData: CountryEnvironmentalData | undefined;
-    lFlag: String = "";
-    sCountry: String = "";
-    sName: String = "";
+    lFlag: string = "";
+    sCountry: string = "";
+    sName: string = "";
     isPopupVisible?: boolean;
-    plant?:Plant;
+    isPopupEditVisible?: boolean;
+    plant?: Plant;
+
+    plantToUpdate: UpdatePlantDto = {
+        id: 0,
+        name: '',
+        country: '',
+        readings: 0,
+        medAlerts: 0,
+        redAlerts: 0,
+        sensorsDisabled: 0,
+        flag: '',
+        status: false
+    };
+
 
     plantForm: FormGroup = new FormGroup({
-        namePlant: new FormControl('', [Validators.required,Validators.minLength(3)]),
+        namePlant: new FormControl('', [Validators.required, Validators.minLength(3)]),
         country: new FormControl('', [Validators.required])
     });
+    plantFormEdit: FormGroup = new FormGroup({
+        namePlantEdit: new FormControl('', [Validators.required, Validators.minLength(3)]),
+        country: new FormControl('', [Validators.required]),
+        lecture: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
+        medAlert: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
+        redAlert: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
+        sensor: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')])
+    });
 
+    loadPlantData(plant: GetPlantFlagDto): void {
+        if (this.plantToUpdate) {
+            this.plantToUpdate.id = plant.id;
+            this.plantToUpdate.flag = plant.flag;
+            this.plantToUpdate.status = plant.status;
 
-    closePopup(): void {
-        this.isPopupVisible = false;
-
+            this.plantFormEdit.patchValue({
+                namePlantEdit: plant.name,
+                country: plant.country,
+                lecture: plant.readings,
+                medAlert: plant.medAlerts,
+                redAlert: plant.redAlerts,
+                sensor: plant.sensorsDisabled
+            });
+        } else {
+            console.error("plantToUpdate no está definido");
+        }
     }
-    onTogglePopCreate() {
-        this.isPopupVisible = true;
 
-    }
 
     onSubmit(): void {
+
+
         if (this.plantForm.valid) {
             const formData = {
                 name: this.plantForm.value.namePlant,
                 country: this.plantForm.value.country
             };
-        
+
             const createSubscription = this.dashboardService.createPlant(formData).subscribe({
                 next: (newPlant) => {
                     console.log('Planta creada con éxito:', newPlant);
                     this.plantForm.reset();
                     this.closePopup();
+
+                    setTimeout(() => {
+                        this.loadPlants();
+                        this.calculateTotals();
+                    }, 300);
                 },
                 error: (err) => {
                     console.error('Error al crear la planta', err);
                 }
             });
-    
-            // Agregar la suscripción al array de suscripciones
             this.subscriptions.push(createSubscription);
         } else {
             console.log('Formulario no válido');
         }
     }
-    
-    
 
+    onSubmitEdit(): void {
+        if (this.plantFormEdit.valid) {
+            const formData = {
+                id: this.plantToUpdate?.id,
+                name: this.plantFormEdit.value.namePlantEdit,
+                country: this.plantFormEdit.value.country,
+                readings: Number(this.plantFormEdit.value.lecture),
+                medAlerts: Number(this.plantFormEdit.value.medAlert),
+                redAlerts: Number(this.plantFormEdit.value.redAlert),
+                sensorsDisabled: Number(this.plantFormEdit.value.sensor),
+                flag: this.plantToUpdate?.flag,
+                status: this.plantToUpdate?.status
+            };
+
+            const createSubscription = this.dashboardService.updtePlant(formData).subscribe({
+                next: (newPlant) => {
+                    console.log('Planta actualizada con éxito:', newPlant);
+                    this.plantFormEdit.reset();
+                    this.closePopup();
+
+                    setTimeout(() => {
+                        this.loadPlants();
+                        this.calculateTotals();
+                    }, 300);
+                },
+                error: (err) => {
+                    console.error('Error al actualizar la planta', err);
+                }
+            });
+            this.subscriptions.push(createSubscription);
+        } else {
+            console.log('Formulario no válido');
+        }
+    }
+
+
+    onModifyClick(plant: GetPlantFlagDto): void {
+        console.log('Modificar planta:', plant);
+        this.isPopupEditVisible = true;
+        this.loadPlantData(plant);
+
+        this.activeDropdownIndex = null;
+    }
+
+    closePopup(): void {
+        this.isPopupVisible = false;
+        this.isPopupEditVisible = false;
+    }
+    onTogglePopCreate() {
+        this.isPopupVisible = true;
+    }
 
     @HostListener('document:click', ['$event'])
     closeDropdowns(event: MouseEvent): void {
@@ -89,22 +177,35 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.activeDropdownIndex = this.activeDropdownIndex === index ? null : index;
     }
 
-    onModifyClick(plant: GetPlantFlagDto): void {
-        console.log('Modificar planta:', plant);
-        this.activeDropdownIndex = null;
-    }
+
 
     onDeleteClick(plant: GetPlantFlagDto): void {
-        console.log('Eliminar planta:', plant);
+        console.log(plant.id)
+
+        const deleteSubscription = this.dashboardService.deletePlant(plant.id).subscribe({
+            next: () => {
+                console.log('Planta eliminada con éxito:', plant);
+                setTimeout(() => {
+                    this.loadPlants();
+                }, 300);
+            },
+            error: (err) => {
+                console.error('Error al eliminar la planta', err);
+            }
+        });
+
+        this.subscriptions.push(deleteSubscription);
         this.activeDropdownIndex = null;
     }
-
-
-
 
 
 
     calculateTotals(): void {
+
+        this.clectures = 0;
+        this.cmedAlerts = 0;
+        this.credAlerts = 0;
+        this.csensorsDisabled = 0;
         this.plants?.forEach(plant => {
             this.clectures += plant.readings;
             this.cmedAlerts += plant.medAlerts;
@@ -172,9 +273,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
             console.log('No se encontraron métricas para el país:', nameCountry);
         }
     }
-
-
-
     ngOnInit() {
         this.loadPlants();
         this.calculateTotals();

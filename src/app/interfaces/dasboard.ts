@@ -11,6 +11,18 @@ export interface GetPlantFlagDto {
     url:String;
   }
 
+  export interface UpdatePlantDto {
+    id: number;         
+    name: string;        
+    readings: number;    
+    medAlerts: number;   
+    redAlerts: number;  
+    sensorsDisabled: number;  
+    country: string;     
+    flag: string;        
+    status: boolean;     
+  }
+
 
   export interface Plant {
     name: string;

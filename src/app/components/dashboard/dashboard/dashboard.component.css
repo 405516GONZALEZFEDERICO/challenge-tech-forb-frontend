@@ -78,6 +78,7 @@
   justify-content: space-between;
   white-space: nowrap;
   list-style-type: none;
+  gap:10px;
 }
 
 .nombre-auth {
@@ -167,18 +168,6 @@
   margin-top: 20px;
   overflow: hidden; 
 }
-
-/* .new-plant {
-  width: 307px;
-  height: 28px;
-  padding: 15px 25px 0px 25px;
-  gap: 25px;
-  opacity: 1;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-} */
 
 .text-new-plant {
   width: 62px;
@@ -640,7 +629,7 @@ table {
   height: 12.38px;
   gap: 0px;
   opacity: 0px;
-
+  
 }
 
 .ff {
@@ -652,7 +641,9 @@ table {
 }
 
 .nameCountryPlant {
-  width: 101px;
+  min-width: 101px;           
+  width: auto;                
+  max-width: 150px;   
   height: 18px;
   gap: 0px;
   opacity: 0px;
@@ -664,6 +655,9 @@ table {
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   margin-left: 3px;
+  white-space: nowrap;        
+  overflow: hidden;            
+  text-overflow: ellipsis;    
 
 }
 
