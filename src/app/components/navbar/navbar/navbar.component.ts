@@ -25,19 +25,16 @@ export class NavbarComponent {
   }
 
   checkScreenSize() {
-    this.isMobileView = window.innerWidth <= 393;
+    this.isMobileView = window.innerWidth <= 480;
+    if (!this.isMobileView) {
+      this.isMenuOpen = false;
+    }
   }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
-    const navbar = document.querySelector('.navbar');
-    const navList = document.querySelector('.nav-list');
-    
-    if (navbar && navList) {
-      navbar.classList.toggle('navbar-mobile');
-      navList.classList.toggle('nav-list-mobile');
-    }
   }
+
 
   logout() {
     console.log("Logout clicked");
