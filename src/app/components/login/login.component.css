@@ -1,8 +1,15 @@
 .container {
     width: 1440px;
-    height: 900px;
+    height: 942px;
+    gap: 0px;
+    opacity: 0px;
     position: relative;
     margin: 0 auto;
+    user-select: none;  
+    width: 1440px;
+
+
+
 }
 
 .image {
@@ -15,6 +22,7 @@
     background-size: 796px 900px;
     background-repeat: no-repeat;
     z-index: 0;
+
 }
 
 .image::before {
@@ -23,7 +31,6 @@
     width: 796px;
     height: 900px;
     background-image: linear-gradient(180deg, #33A3AA 0%, #107076 100%);
-    z-index: 1;
     opacity: 0.85;
 }
 
@@ -48,7 +55,7 @@
 .initSession {
     position: absolute;
     top: 319px;
-    left: 95px;
+    left: 128px;
     width: 361px;
     height: 58px;
     font-family: 'Poppins', sans-serif;
@@ -59,6 +66,8 @@
     color: #FFFFFF;
     opacity: 1;
     z-index: 3;
+
+
 }
 
 .paragraph {
@@ -66,7 +75,7 @@
     width: 360px;
     height: 72px;
     top: 387px;
-    left: 95px;
+    left: 128px;
     gap: 0px;
     opacity: 0px;
     font-family: 'Poppins', sans-serif;
@@ -84,7 +93,7 @@
 .wrapper {
     position: absolute;
     top: 479px;
-    left: 95px;
+    left: 128px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -126,8 +135,7 @@
 }
 
 .logContainer {
-    margin-left: -54px;
-    margin-top: -135px;
+    margin-left: 4px;
 }
 
 .isesion {
@@ -249,9 +257,18 @@
 }
 
 .form-control:focus~.form-label,
-.form-control:not(:placeholder-shown)~.form-label {
+.form-control:not(:placeholder-shown)~.form-label,
+.form-control.is-invalid~.form-label {
     top: 0;
-    font-size: 12px;
+    z-index: 1;
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545;
+}
+
+.form-control.is-invalid~.form-label {
+    color: #dc3545;
 }
 
 .form-control::placeholder {
@@ -279,13 +296,34 @@ form {
     white-space: nowrap;
 }
 
-.containerButton {
+.requiredPassword {
+    display: flex;
+    flex-direction: column;
+    width: 178px; 
+    height: 48px;
+    color: #84818A;
+    font-size: 14px; 
+    margin-top: 8px; 
+    opacity: 1; 
+    list-style-type:    none; 
+    padding-left: 0px; 
+    margin-top: 0px;
+}
+.containerButton{
     display: flex;
     flex-direction: row;
     gap: 20px;
     z-index: 3;
     justify-content: space-between;
 }
+
+.containerButton2 {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    z-index: 3;
+    justify-content: space-between;
+    padding-top: 20px;}
 
 .forgotPassword {
     margin-top: 15px;
@@ -321,9 +359,9 @@ form {
     text-decoration-skip-ink: none;
 }
 
-.containerTotal {
-    margin-top: 100px;
-}
+/* .containerTotal {
+    margin-top: 0px;
+} */
 
 .highlight {
     color: #33A3AA;
@@ -334,6 +372,7 @@ form {
     text-align: left;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
+    cursor: pointer;
 }
 
 .reCaptcha {
@@ -352,7 +391,7 @@ form {
     opacity: 0px;
     color: #abaaac;
     margin-top: 15px;
-    margin-left: -29px;
+    margin-left: 3px;
 }
 
 .nonAcount {
@@ -370,8 +409,8 @@ form {
     gap: 0px;
     opacity: 0px;
     color: #47464A;
-    margin-top: 21px;
-    margin-left: -23px;
+    margin-top: 6px;
+    margin-left: 1px;
 }
 
 
@@ -384,6 +423,7 @@ form {
     left: -720px;
     gap: 0px;
     opacity: 0px;
+    margin-top: -50px;
 
 }
 
@@ -422,402 +462,4 @@ form {
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     opacity: 1px;
-}
-
-.email-small-input {
-    width: 340px;
-    height: 42px;
-    gap: 0px;
-    border-radius: 12px 0px 0px 0px;
-    border: 1px 0px 0px 0px;
-    opacity: 0px;
-    border: 1px solid #F5F6F5
-}
-
-.password-small-input {
-    width: 340px;
-    height: 42px;
-    gap: 0px;
-    border-radius: 12px 0px 0px 0px;
-    border: 1px 0px 0px 0px;
-    opacity: 0px;
-    border: 1px solid #F5F6F5
-}
-
-.login-small-form {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    margin-top: 45px;
-}
-
-.login-small-input {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 340px;
-    height: 73px;
-    gap: 10px;
-    opacity: 0px;
-    margin-bottom: 25px;
-}
-
-.login-small-input label {
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: #202020;
-}
-
-.login-small-input input {
-    width: 100%;
-    height: 48px;
-    border: 1px solid #DCDBDD;
-    border-radius: 12px;
-    padding: 0 16px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    color: #202020;
-    outline: none;
-
-
-}
-
-.login-small-input input::placeholder {
-    color: #84818A;
-    font-size: 12px;
-}
-
-.password-input-container {
-    position: relative;
-}
-
-.eye-button {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-}
-
-.eye-button svg path {
-    fill: #84818A;
-}
-
-.login-small-button {
-    width: 100%;
-    height: 48px;
-    background: #33A3AA;
-    border: none;
-    border-radius: 12px;
-    color: #FFFFFF;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    margin-top: 16px;
-}
-
-.login-small-button:hover {
-    background: #107076;
-}
-
-.login-small-logo {
-    width: 108px;
-    height: 89px;
-    display: block;
-    margin: 0 auto;
-    margin-top: 96px;
-    position: relative;
-    opacity: 1;
-    object-fit: contain;
-}
-
-.login-small-content {
-    margin-top: 9px;
-    width: 340px;
-    height: 241px;
-    top: 223px;
-    left: 27px;
-    gap: 30px;
-    opacity: 1;
-    margin-left: 10px;
-}
-
-.iniciarSesionBoxText {
-    width: 340px;
-    height: 45px;
-    gap: 0px;
-    opacity: 1;
-
-}
-
-
-@media screen and (min-width: 481px) and (max-width: 1024px) {
-    .login-small {
-        display: none !important;
-    }
-
-    .container {
-        width: 100%;
-        height: 100vh;
-        margin: 0;
-        flex-direction: column;
-        display: flex !important;
-    }
-
-    .image {
-        width: 100%;
-        height: 35vh;
-        margin-left: 0;
-        background-size: cover;
-        background-position: center;
-    }
-
-    .image::before {
-        width: 100%;
-        height: 35vh;
-    }
-
-    .login {
-        width: 100%;
-        margin-left: 0;
-        border: none;
-        border-radius: 30px 30px 0 0;
-        margin-top: -30px;
-        box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .initSession {
-        top: 15vh;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
-    }
-
-    .paragraph {
-        top: 22vh;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
-    }
-    .logContainer {
-        margin-left: 0;
-        margin-top: 0;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .container {
-        display: none !important; 
-    }
-
-    .login-small {
-        display: block !important; 
-        width: 100%;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: #FFFFFF;
-        overflow-y: auto;
-    }
-
-    .login-small-input .is-invalid {
-        border-color: #dc3545;
-    }
-
-    .login-small-input .invalid-feedback {
-        margin-top: 4px;
-        margin-bottom: 0;
-    }
-
-}
-
-
-@media screen and (max-width: 390px) and (min-height: 844px) {
-    .container {
-        display: none !important;
-    }
-
-    .login-small {
-        display: block !important;
-        width: 100%;
-        height: 100vh;
-    }
-}
-
-.email-small-input::placeholder {
-    width: 226px;
-    height: 13px;
-    top: 16px;
-    left: 19px;
-    gap: 0px;
-    opacity: 0px;
-
-    font-family: 'PP Neue Montreal', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16.8px;
-    letter-spacing: 0.0264em;
-    text-align: left;
-    color: #777777;
-
-}
-
-.password-small-input::placeholder {
-    width: 215px;
-    height: 13.22px;
-    top: 15.56px;
-    left: 19px;
-    gap: 0px;
-    opacity: 0px;
-
-
-    font-family: 'PP Neue Montreal', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16.8px;
-    letter-spacing: 0.0264em;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-
-
-
-}
-
-.btn-small-login {
-    margin-left: 7.5px;     
-    width: 353px;
-    height: 52px;
-    top: 775px;
-    left: 20px;
-    gap: 0px;
-    border-radius: 20px;
-    opacity: 0px;
-    background: #28B1B9;
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 19.36px;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    text-align: center;
-    margin-top: 240px;
-    border: none;
-    color: #FFFFFF;
-}
-
-.pass-small-text {
-    width: 137px;
-    height: 17px;
-    gap: 0px;
-    opacity: 0px;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16.8px;
-    letter-spacing: 0.0264em;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    font-family: 'PP Neue Montreal', sans-serif;
-    color: #A7AFB7;
-
-}
-button.b
-
-.container-small-inputs {
-    width: 340px;
-    height: 166px;
-    gap: 20px;
-    opacity: 1;
-}
-
-.email-small-text {
-    font-family: Poppins;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 21px;
-    letter-spacing: 0.0264em;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    color: #84818A;
-}
-
-.container-small-text {
-    width: 137px;
-    height: 21px;
-    gap: 0px;
-    opacity: 0px;
-}
-
-.container-small-input {
-    width: 340px;
-    height: 42px;
-    gap: 0px;
-    opacity: 1;
-
-}
-.login-small * {
-    opacity: 1;
-}
-.invalid-feedback {
-    display: none;
-    color: #dc3545;
-    font-size: 12px;
-    margin-top: 8px;
-    margin-bottom: 15px;
-    margin-left: 16px;
-    font-family: 'PP Neue Montreal', sans-serif;
-
-}
-
-.form-control.is-invalid {
-    border-color: #dc3545;
-}
-
-.form-control.is-invalid:focus {
-    border-color: #dc3545;
-    box-shadow: 0 0 0 0.2rem rgba(247, 1, 26, 0.25);
-}
-
-.form-control.is-invalid+.form-label {
-    color: #dc3545;
-}
-
-.form-control.is-invalid~.invalid-feedback {
-    display: block;
-}
-
-.nonAcountmobile{
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 17px;
-    text-align: center;
-    
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    width: 385px;
-    height: 34px;
-    top: 607px;
-    left: 908px;
-    gap: 0px;
-    opacity: 0px;
-    color: #47464A;
-    margin-top: 21px;
-    margin-left: -23px;
-}
-
-.containerFootForm{
-    margin-bottom: 50px;
 }
