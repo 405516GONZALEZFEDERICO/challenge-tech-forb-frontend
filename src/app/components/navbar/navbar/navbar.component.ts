@@ -25,7 +25,7 @@ export class NavbarComponent {
   }
 
   checkScreenSize() {
-    this.isMobileView = window.innerWidth <= 480;
+    this.isMobileView = window.innerWidth <= 425;
     if (!this.isMobileView) {
       this.isMenuOpen = false;
     }

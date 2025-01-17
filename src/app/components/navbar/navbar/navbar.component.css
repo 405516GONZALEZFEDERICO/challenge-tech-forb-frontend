@@ -168,8 +168,8 @@
     }
 
 
-    @media screen and (max-width: 393px) {
 
+    @media screen and (max-width: 425px) {
         .navbar {
             display: block;
             width: 80px;
