@@ -7,7 +7,6 @@ export interface RegisterUserDto {
     name: string;
     password: string;
     email: string;
-    urlImg:string;
 }
 
 export interface TokenResponseDto {
