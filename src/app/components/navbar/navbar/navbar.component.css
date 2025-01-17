@@ -36,8 +36,37 @@
 
     }
 
+
+
+
     .logOut {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        position: relative;
+        z-index: 1003;
+    }
+
+
+
+
+    .logOut a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 8px;
+        z-index: 2;
+    }
+
+    .logOut svg {
         width: 18px;
+        height: 19px;
+        pointer-events: none;
     }
 
     .hamburger {
@@ -60,7 +89,9 @@
         color: white;
         position: fixed;
         transition: all 0.3s ease;
+        z-index: 1000;
     }
+
 
     .container-logo {
         display: flex;
@@ -75,34 +106,28 @@
         height: 32.61px;
     }
 
-    
-.nav-list {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-    list-style: none;
-    padding: 0;
-    margin: 0; /* Añadido para eliminar margen por defecto */
-}
-.nav-list li {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 0 10px; /* Añadido para dar espacio a los lados */
-}
 
-
-    .nav-list li:hover svg path,
-    .nav-list li:hover svg line {
-        fill: #000000;
-        stroke: #000000;
+    .nav-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        list-style: none;
+        position: relative;
+        z-index: 1001;
     }
 
-    .logOut {
-        width: 18px;
+    .nav-list li {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        position: relative;
+        z-index: 1002;
     }
+
+
+
+
 
 
 
@@ -133,39 +158,70 @@
         background-color: #FFFFFF;
         height: 60px;
     }
+
     .container-navbar-hamburguesa {
         display: none;
     }
-
-    .main-content {
-        flex: 1;
-        background-color: #ffff;
-        color: black;
-        margin-left: 80px;
+    .logOut:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        border-radius: 4px;
     }
 
 
     @media screen and (max-width: 393px) {
+
         .navbar {
             display: block;
-            width: 0;
+            width: 80px;
             height: 100vh;
             position: fixed;
             top: 0;
-            left: 0;
+            left: -80px;
             z-index: 1000;
             overflow: hidden;
-            padding-top: 80px; 
+            padding-top: 80px;
+            transition: left 0.3s ease;
+            background-color: #FFFFFF;
         }
+
+        .navbar.navbar-mobile {
+            left: 0;
+            width: 100%;
+        }
+
+        .nav-list-mobile {
+            opacity: 1 !important;
+            visibility: visible !important;
+            background-color: #FFFFFF;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 80px;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .hamburger {
+            display: block;
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            z-index: 1001;
+            padding-top: 50px;
+
+        }
+
+
+
+
         .container-logo {
             display: none;
         }
 
-        .navbar.navbar-mobile {
-            width: 100%;
-        }
 
-    
 
         .container-navbar-hamburguesa {
             display: flex;
@@ -193,10 +249,10 @@
         }
 
         .nav-list li {
-            width: auto; /* Cambiado para centrar mejor los items */
-            padding: 10px 0; /* Espaciado vertical */
+            width: auto;
+            padding: 10px 0;
         }
-    
+
         .logo-nav-bar {
             display: block;
             width: 81px;
@@ -205,54 +261,34 @@
             left: 50%;
             transform: translateX(-50%);
             background-color: #D9D9D9;
-            z-index: 999; /* Asegura que esté por encima del navbar pero debajo del hamburger */
         }
-
-
-        .hamburger {
-            display: block;
-            position: fixed;
-            top: 25px;
-            z-index: 1001;
-            margin-right: -500px;
-        }
-       
-        .navbar {
-            padding-top: 60px;
-        }
-
 
         .nav-list {
-            opacity: 0;
-            visibility: hidden;
             transition: opacity 0.3s ease;
+            margin-top: 200px;
         }
 
         .ring {
             left: 20px;
-            margin-top: 18px;
+            padding-top: 50px;
             padding-right: 100px;
             display: flex;
             position: fixed;
             top: 20px;
-            right: 20px;
             margin-left: 310px;
-            width: 29px;
-            height: 29px;
-            margin-bottom: 16px;
         }
 
-        .ring.svg {
-            fill: #000000;
-            stroke: #000000;
+        .logOut {
+            width: 100%;
+            height: 50px;
         }
-        .nav-list.nav-list-mobile {
-            opacity: 1;
-            visibility: visible;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 60px;
-            height: 100vh;
+
+        .logOut a {
+            padding: 12px;
+        }
+
+        .logOut:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 4px;
         }
     }

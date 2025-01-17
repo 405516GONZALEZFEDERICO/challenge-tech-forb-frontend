@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../../services/login-service/auth.service';
 
@@ -11,22 +11,39 @@ import { AuthService } from '../../../services/login-service/auth.service';
 })
 export class NavbarComponent {
   isMenuOpen = false;
+  isMobileView = false;
   private authService = inject(AuthService);
   private router = inject(Router);
 
- 
+  ngOnInit() {
+    this.checkScreenSize();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkScreenSize();
+  }
+
+  checkScreenSize() {
+    this.isMobileView = window.innerWidth <= 393;
+  }
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     const navbar = document.querySelector('.navbar');
     const navList = document.querySelector('.nav-list');
     
-    navbar?.classList.toggle('navbar-mobile');
-    navList?.classList.toggle('nav-list-mobile');
+    if (navbar && navList) {
+      navbar.classList.toggle('navbar-mobile');
+      navList.classList.toggle('nav-list-mobile');
+    }
   }
 
   logout() {
+    console.log("Logout clicked");
     this.authService.logout();
-    this.router.navigate(['/login']); 
+    this.router.navigate(['/login']);
   }
+
 
 }
