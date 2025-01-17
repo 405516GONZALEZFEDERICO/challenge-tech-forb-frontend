@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8081/';
+const BASE_URL = 'https://challenge-back-end.onrender.com/';
 const API_METRICS="https://my-json-server.typicode.com/405516GONZALEZFEDERICO/fake-api-metrics/environmentalData";
 export const environment = {
   production: false,
