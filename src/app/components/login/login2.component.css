@@ -238,7 +238,7 @@ margin-top: 250px;
 }
 
 .email-small-text {
-    font-family: Poppins;
+    font-family: 'Poppins', sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 21px;
@@ -355,7 +355,8 @@ margin-top: 250px;
     height: 48px;
     border: 1px solid #DCDBDD;
     padding: 0 16px;
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
+
     font-size: 14px;
     outline: none;
     border-radius: 12px;
@@ -392,6 +393,10 @@ margin-top: 250px;
     margin-bottom: 32px; 
 }
 
+
+
+
+
 /* MEDIAQUERY */
 
 
@@ -399,6 +404,7 @@ margin-top: 250px;
     .login-small {
         display: none !important;
     }
+
 
     .container {
         width: 100%;
@@ -454,11 +460,107 @@ margin-top: 250px;
     }
 }
 
-@media screen and (max-width: 480px) {
+
+
+.button-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .spinner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    gap: 8px;
+    width: 100%; 
+  }
+  
+  .spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s linear infinite; 
+}
+  
+  @keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+  }
+  
+  button:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+    background: #33A3AA; 
+}
+
+
+
+
+
+
+.custom-swal-title {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    color: #202020;
+    
+
+    text-align: center;
+  }
+  
+  .custom-swal-content {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    color: #202020;
+  }
+  
+  .custom-swal-confirm-button {
+    background-color: #33A3AA;
+    color: white;
+    border-radius: 4px;
+    padding: 10px 20px;
+    
+
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    
+  }
+  
+  .custom-swal-confirm-button:hover {
+    background-color: #287F80;
+  }
+
+
+@media screen and (max-width: 450px) {
     .container {
         display: none !important;
+        width: 393px; 
+        height: 852px; 
+        gap: 0px;
+        opacity: 1;
+        position: relative;
+        margin: 0 auto;
+        user-select: none;
     }
+    .foot-container {
+        padding-top: 22px; 
+      }
+      .top2{
+        padding-top: 23px;
 
+      }
     .login-small {
         display: block !important;
         width: 100%;
@@ -485,6 +587,12 @@ margin-top: 250px;
 
     .login-small-input {
         margin-bottom: 30px;
+    }
+
+
+    .eye-icon {
+        right: -10px; 
+     
     }
 
 }

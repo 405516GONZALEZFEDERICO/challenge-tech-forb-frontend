@@ -287,8 +287,7 @@ select::placeholder {
 
 
 
-    @media screen and (max-width: 425px) {
-    
+    @media screen and (max-width: 450px) {
       .dashboard,.dashboard,.container-dashboard{
         display: none;
       }

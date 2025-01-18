@@ -166,10 +166,7 @@
         background-color: rgba(0, 0, 0, 0.05);
         border-radius: 4px;
     }
-
-
-
-    @media screen and (max-width: 425px) {
+    @media screen and (max-width: 450px) {
         .navbar {
             display: block;
             width: 80px;

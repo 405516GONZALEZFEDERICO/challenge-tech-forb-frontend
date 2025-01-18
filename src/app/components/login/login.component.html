@@ -43,13 +43,13 @@
             </div>
 
             <div class="inputPassword">
-              <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Contraseña"
+              <input [type]="showPasswordLogin ? 'text' : 'password'" class="form-control" placeholder="Contraseña"
                 formControlName="password"
                 [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}">
               <label class="form-label">Contraseña</label>
 
               <svg class="eye-icon" width="18" height="12" viewBox="0 0 18 12" fill="none"
-                xmlns="http://www.w3.org/2000/svg" (click)="togglePasswordVisibility()">
+                xmlns="http://www.w3.org/2000/svg" (click)="togglePasswordVisibilityLogin()">
                 <path fill-rule="evenodd" clip-rule="evenodd"
                   d="M9 2.28882e-05C4.90909 2.28882e-05 1.41545 2.48802 0 6.00002C1.41545 9.51202 4.90909 12 9 12C13.0909 12 16.5845 9.51202 18 6.00002C16.5845 2.48802 13.0909 2.28882e-05 9 2.28882e-05ZM8.99924 10C6.74106 10 4.90833 8.208 4.90833 6C4.90833 3.792 6.74106 2 8.99924 2C11.2574 2 13.0901 3.792 13.0901 6C13.0901 8.208 11.2574 10 8.99924 10ZM8.99949 3.59959C7.64131 3.59959 6.54494 4.67159 6.54494 5.99959C6.54494 7.32759 7.64131 8.39959 8.99949 8.39959C10.3577 8.39959 11.454 7.32759 11.454 5.99959C11.454 4.67159 10.3577 3.59959 8.99949 3.59959Z"
                   fill="#84818A" />
@@ -71,8 +71,14 @@
               <div class="forgotPassword">
                 ¿Olvidaste tu contraseña?
               </div>
-              <button type="submit" class="loginButton">
-                Iniciar sesión
+              <button type="submit" class="loginButton" [disabled]="loading">
+                <div class="button-content">
+                  <span *ngIf="!loading">Iniciar sesión</span>
+                  <div *ngIf="loading" class="spinner-container">
+                    <div class="spinner"></div>
+                    <span>Cargando...</span>
+                  </div>
+                </div>
               </button>
             </div>
           </div>
@@ -165,7 +171,7 @@
             </div>
 
             <div class="inputPassword">
-              <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Contraseña"
+              <input [type]="showPasswordRegister ? 'text' : 'password'" class="form-control" placeholder="Contraseña"
                 formControlName="password"
                 [ngClass]="{'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched}">
               <label class="form-label">Contraseña</label>
@@ -173,7 +179,7 @@
            
 
               <svg class="eye-icon" width="18" height="12" viewBox="0 0 18 12" fill="none"
-                xmlns="http://www.w3.org/2000/svg" (click)="togglePasswordVisibility()">
+                xmlns="http://www.w3.org/2000/svg" (click)="togglePasswordVisibilityRegister()">
                 <path fill-rule="evenodd" clip-rule="evenodd"
                   d="M9 2.28882e-05C4.90909 2.28882e-05 1.41545 2.48802 0 6.00002C1.41545 9.51202 4.90909 12 9 12C13.0909 12 16.5845 9.51202 18 6.00002C16.5845 2.48802 13.0909 2.28882e-05 9 2.28882e-05ZM8.99924 10C6.74106 10 4.90833 8.208 4.90833 6C4.90833 3.792 6.74106 2 8.99924 2C11.2574 2 13.0901 3.792 13.0901 6C13.0901 8.208 11.2574 10 8.99924 10ZM8.99949 3.59959C7.64131 3.59959 6.54494 4.67159 6.54494 5.99959C6.54494 7.32759 7.64131 8.39959 8.99949 8.39959C10.3577 8.39959 11.454 7.32759 11.454 5.99959C11.454 4.67159 10.3577 3.59959 8.99949 3.59959Z"
                   fill="#84818A" />
@@ -190,13 +196,13 @@
             </div>
 
             <div class="inputPassword">
-              <input [type]="showRepeatPassword ? 'text' : 'password'" class="form-control"
+              <input [type]="showRepeatPasswordRegister ? 'text' : 'password'" class="form-control"
                 placeholder="Repetir contraseña" formControlName="repeatPassword"
                 [ngClass]="{'is-invalid': registerForm.get('repeatPassword')?.invalid && registerForm.get('repeatPassword')?.touched}">
               <label class="form-label">Repetir contraseña</label>
             
               <svg class="eye-icon" width="18" height="12" viewBox="0 0 18 12" fill="none"
-                xmlns="http://www.w3.org/2000/svg" (click)="togglePasswordVisibilityT()">
+                xmlns="http://www.w3.org/2000/svg" (click)="togglePasswordRepeatVisibilityRegister()">
                 <path fill-rule="evenodd" clip-rule="evenodd"
                   d="M9 2.28882e-05C4.90909 2.28882e-05 1.41545 2.48802 0 6.00002C1.41545 9.51202 4.90909 12 9 12C13.0909 12 16.5845 9.51202 18 6.00002C16.5845 2.48802 13.0909 2.28882e-05 9 2.28882e-05ZM8.99924 10C6.74106 10 4.90833 8.208 4.90833 6C4.90833 3.792 6.74106 2 8.99924 2C11.2574 2 13.0901 3.792 13.0901 6C13.0901 8.208 11.2574 10 8.99924 10ZM8.99949 3.59959C7.64131 3.59959 6.54494 4.67159 6.54494 5.99959C6.54494 7.32759 7.64131 8.39959 8.99949 8.39959C10.3577 8.39959 11.454 7.32759 11.454 5.99959C11.454 4.67159 10.3577 3.59959 8.99949 3.59959Z"
                   fill="#84818A" />
@@ -222,7 +228,13 @@
                 <li>- Al menos 1 carácter especial</li>
               </ul>
               <button type="submit" class="loginButton">
-                Registrarse
+                <div class="button-content">
+                  <span *ngIf="!loading">Registrarse</span>
+                  <div *ngIf="loading" class="spinner-container">
+                    <div class="spinner"></div>
+                    <span>Cargando...</span>
+                  </div>
+                </div>
               </button>
             </div>
           </div>
@@ -282,13 +294,13 @@
               <label class="pass-small-text">Contraseña</label>
             </div>
             <div class="password-input-container">
-              <input [type]="showPassword ? 'text' : 'password'" class="password-small-input" placeholder="Contraseña"
+              <input [type]="showPasswordLogin ? 'text' : 'password'" class="password-small-input" placeholder="Contraseña"
                 formControlName="password"
                 [ngClass]="{'is-invalid': loginFormCel.get('password')?.invalid && loginFormCel.get('password')?.touched}">
 
             
               <svg class="eye-icon" width="18" height="12" viewBox="0 0 18 12" fill="none"
-                xmlns="http://www.w3.org/2000/svg" (click)="togglePasswordVisibility()">
+                xmlns="http://www.w3.org/2000/svg" (click)="togglePasswordVisibilityLogin()">
                 <path fill-rule="evenodd" clip-rule="evenodd"
                   d="M9 2.28882e-05C4.90909 2.28882e-05 1.41545 2.48802 0 6.00002C1.41545 9.51202 4.90909 12 9 12C13.0909 12 16.5845 9.51202 18 6.00002C16.5845 2.48802 13.0909 2.28882e-05 9 2.28882e-05ZM8.99924 10C6.74106 10 4.90833 8.208 4.90833 6C4.90833 3.792 6.74106 2 8.99924 2C11.2574 2 13.0901 3.792 13.0901 6C13.0901 8.208 11.2574 10 8.99924 10ZM8.99949 3.59959C7.64131 3.59959 6.54494 4.67159 6.54494 5.99959C6.54494 7.32759 7.64131 8.39959 8.99949 8.39959C10.3577 8.39959 11.454 7.32759 11.454 5.99959C11.454 4.67159 10.3577 3.59959 8.99949 3.59959Z"
                   fill="#84818A" />
@@ -297,23 +309,32 @@
                 @if (loginFormCel.get('password')?.errors?.['required']) {
                 <span>La contraseña es requerida</span>
                 }
-                @if (loginForm.get('password')?.errors?.['pattern']) {
+                @if (loginFormCel.get('password')?.errors?.['pattern']) {
                 <span>La contraseña es no es valida</span>
                 }
               </div>
             </div>
           </div>
         </div>
-        <button type="submit" class="btn-small-login">
-          Ingresar
-        </button>
-      </form>
-      <div class="containerFootForm">
-        <div class="nonAcountmobile">
-          ¿No tienes una cuenta?
-          <span class="highlight" (click)="toggleView()">Regístrate</span>
+        <div class="foot-container">
+          <button type="submit" class="btn-small-login" >
+            <div class="button-content">
+              <span *ngIf="!loading">Iniciar sesión</span>
+              <div *ngIf="loading" class="spinner-container">
+                <div class="spinner"></div>
+                <span>Cargando...</span>
+              </div>
+            </div>
+          </button>
+          <div class="containerFootForm">
+            <div class="nonAcountmobile">
+              ¿No tienes una cuenta?
+              <span class="highlight" (click)="toggleView()">Regístrate</span>
+            </div>
+          </div>
         </div>
-      </div>
+        
+      </form>
     </div>
   </div>
 </ng-container> 
@@ -380,12 +401,12 @@
               <label class="pass-small-text">Contraseña</label>
             </div>
             <div class="password-input-container">
-              <input [type]="showPassword ? 'text' : 'password'" class="password-small-input" placeholder="Contraseña"
+              <input [type]="showPasswordRegister ? 'text' : 'password'" class="password-small-input" placeholder="Contraseña"
                 formControlName="password"
                 [ngClass]="{'is-invalid': registerFormCel.get('password')?.invalid && registerFormCel.get('password')?.touched}">
 
                 <svg class="eye-icon" width="18" height="12" viewBox="0 0 18 12" fill="none"
-                xmlns="http://www.w3.org/2000/svg" (click)="togglePasswordVisibility()">
+                xmlns="http://www.w3.org/2000/svg" (click)="togglePasswordVisibilityRegister()">
                 <path fill-rule="evenodd" clip-rule="evenodd"
                   d="M9 2.28882e-05C4.90909 2.28882e-05 1.41545 2.48802 0 6.00002C1.41545 9.51202 4.90909 12 9 12C13.0909 12 16.5845 9.51202 18 6.00002C16.5845 2.48802 13.0909 2.28882e-05 9 2.28882e-05ZM8.99924 10C6.74106 10 4.90833 8.208 4.90833 6C4.90833 3.792 6.74106 2 8.99924 2C11.2574 2 13.0901 3.792 13.0901 6C13.0901 8.208 11.2574 10 8.99924 10ZM8.99949 3.59959C7.64131 3.59959 6.54494 4.67159 6.54494 5.99959C6.54494 7.32759 7.64131 8.39959 8.99949 8.39959C10.3577 8.39959 11.454 7.32759 11.454 5.99959C11.454 4.67159 10.3577 3.59959 8.99949 3.59959Z"
                   fill="#84818A" />
@@ -406,12 +427,12 @@
               <label class="pass-small-text2">Repetir contraseña</label>
             </div>
             <div class="password-input-container">
-              <input [type]="showPassword ? 'text' : 'password'" class="password-small-input"
+              <input [type]="showRepeatPasswordRegister ? 'text' : 'password'" class="password-small-input"
                 placeholder="Repetir tu contraseña" formControlName="repeatPassword"
                 [ngClass]="{'is-invalid': registerFormCel.get('repeatPassword')?.invalid && registerFormCel.get('repeatPassword')?.touched}">
 
                 <svg class="eye-icon" width="18" height="12" viewBox="0 0 18 12" fill="none"
-                xmlns="http://www.w3.org/2000/svg" (click)="togglePasswordVisibilityy()">
+                xmlns="http://www.w3.org/2000/svg" (click)="togglePasswordRepeatVisibilityRegister()">
                 <path fill-rule="evenodd" clip-rule="evenodd"
                   d="M9 2.28882e-05C4.90909 2.28882e-05 1.41545 2.48802 0 6.00002C1.41545 9.51202 4.90909 12 9 12C13.0909 12 16.5845 9.51202 18 6.00002C16.5845 2.48802 13.0909 2.28882e-05 9 2.28882e-05ZM8.99924 10C6.74106 10 4.90833 8.208 4.90833 6C4.90833 3.792 6.74106 2 8.99924 2C11.2574 2 13.0901 3.792 13.0901 6C13.0901 8.208 11.2574 10 8.99924 10ZM8.99949 3.59959C7.64131 3.59959 6.54494 4.67159 6.54494 5.99959C6.54494 7.32759 7.64131 8.39959 8.99949 8.39959C10.3577 8.39959 11.454 7.32759 11.454 5.99959C11.454 4.67159 10.3577 3.59959 8.99949 3.59959Z"
                   fill="#84818A" />
@@ -434,7 +455,13 @@
         </div>
         <div class="top2">
           <button type="submit" class="btn-small-login">
-            Registrar
+            <div class="button-content">
+              <span *ngIf="!loading">Registrarse</span>
+              <div *ngIf="loading" class="spinner-container">
+                <div class="spinner"></div>
+                <span>Cargando...</span>
+              </div>
+            </div>
           </button>
           <div class="containerFootForm">
             <div class="nonAcountmobile">
@@ -444,8 +471,6 @@
           </div>
         </div>
       </form>
-
-
     </div>
   </div>
 </ng-template> 

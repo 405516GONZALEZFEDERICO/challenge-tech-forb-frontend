@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable, tap, throwError } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { TokenResponseDto } from '../../interfaces/auth';
 import { environment } from '../../enviroments/environment.prod';
 
@@ -24,17 +24,30 @@ export class AuthService {
   getRefreshTokenValidator(): string {
     return this.cookieService.get('refresh_token');
   }
+
+
   login(credentials: { email: string; password: string }): Observable<TokenResponseDto> {
-    return this.http.post<TokenResponseDto>(`${this.API_URL.services.login}`, credentials)
-      .pipe(
-        tap(response => {
-          this.cookieService.delete('access_token');
-          this.cookieService.delete('refresh_token');
-          this.cookieService.set('access_token', response.access_token, { secure: true, sameSite: 'Strict' });
-          this.cookieService.set('refresh_token', response.refresh_token, { secure: true, sameSite: 'Strict' });
-        })
-      );
+    return this.http.post<TokenResponseDto>(`${this.API_URL.services.login}`, credentials).pipe(
+      tap(response => {
+        this.cookieService.set('access_token', response.access_token, { secure: true, sameSite: 'Strict' });
+        this.cookieService.set('refresh_token', response.refresh_token, { secure: true, sameSite: 'Strict' });
+      }),
+      catchError(error => {
+        const errorMessage = error.error?.message || 'Error de autenticación';
+        return throwError(() => ({
+          status: error.status,
+          error: {
+            message: errorMessage
+          }
+        }));
+      })
+    );
   }
+  
+
+
+
+  
   getUserNameFromToken(): string {
     const token = this.cookieService.get('access_token');
     if (!token) return '';
@@ -79,15 +92,25 @@ export class AuthService {
     );
   }
 
-  register(userData: { name: string; email: string; password: string }): Observable<TokenResponseDto> {
-    return this.http.post<TokenResponseDto>(`${this.API_URL.services.register}`, userData)
-      .pipe(
-        tap(response => {
-          this.cookieService.set('access_token', response.access_token, { secure: true, sameSite: 'Strict' });
-          this.cookieService.set('refresh_token', response.refresh_token, { secure: true, sameSite: 'Strict' });
-        })
-      );
-  }
+
+register(userData: { name: string; email: string; password: string }): Observable<TokenResponseDto> {
+  return this.http.post<TokenResponseDto>(`${this.API_URL.services.register}`, userData).pipe(
+    tap(response => {
+      this.cookieService.set('access_token', response.access_token, { secure: true, sameSite: 'Strict' });
+      this.cookieService.set('refresh_token', response.refresh_token, { secure: true, sameSite: 'Strict' });
+    }),
+    catchError(error => {
+      const errorMessage = error.error?.message || 'Error en el registro';
+      return throwError(() => ({
+        status: error.status,
+        error: {
+          message: errorMessage
+        }
+      }));
+    })
+  );
+}
+
 
   logout(): void {
     this.cookieService.delete('access_token');

@@ -280,12 +280,6 @@ form {
 }
 
 .forgotPassword {
-    width: 183px;
-    height: 21px;
-    top: 553px;
-    left: 907px;
-    gap: 0px;
-    opacity: 0px;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     font-weight: 400;
@@ -294,6 +288,7 @@ form {
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     white-space: nowrap;
+    margin-top: 15px;
 }
 
 .requiredPassword {
@@ -325,18 +320,7 @@ form {
     justify-content: space-between;
     padding-top: 20px;}
 
-.forgotPassword {
-    margin-top: 15px;
-    color: #47464A;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 21px;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
 
-}
 
 .loginButton {
     width: 164px;
@@ -346,7 +330,7 @@ form {
     left: 1136px;
     gap: 0px;
     border-radius: 12px;
-    opacity: 0px;
+    opacity: 1;
     background: #33A3AA;
     color: #FFFFFF;
     border: none;
@@ -359,9 +343,6 @@ form {
     text-decoration-skip-ink: none;
 }
 
-/* .containerTotal {
-    margin-top: 0px;
-} */
 
 .highlight {
     color: #33A3AA;
@@ -434,6 +415,7 @@ form {
     align-items: center;
     justify-content: center;
     margin-bottom: 40px;
+    
 }
 
 .logo-placeholder {

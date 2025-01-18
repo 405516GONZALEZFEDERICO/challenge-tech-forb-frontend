@@ -3,132 +3,221 @@ import { CommonModule } from '@angular/common';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AuthService } from '../../services/login-service/auth.service';
 import { Router } from '@angular/router';
+import { LoginUserDto, RegisterUserDto, TokenResponseDto } from '../../interfaces/auth';
+import { HttpResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css','./login2.component.css']
+  styleUrls: ['./login.component.css', './login2.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-
 
   private authService = inject(AuthService);
   private router = inject(Router);
   private readonly PASSWORD_PATTERN = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-  showPassword: boolean = false;
-  showRepeatPassword: boolean = false;
 
   loading: boolean = false;
   error: string | null = null;
+
+  registerUser: RegisterUserDto = {
+    name: '',
+    email: '',
+    password: '',
+  };
+
+  loginUser: LoginUserDto = {
+    email: '',
+    password: ''
+  };
+
   isLoginView: boolean = true;
   isMobileView: boolean = true;
 
   loginForm: FormGroup = new FormGroup({
-    password: new FormControl('', [Validators.required,Validators.pattern(this.PASSWORD_PATTERN)]),
+    password: new FormControl('', [Validators.required, Validators.pattern(this.PASSWORD_PATTERN)]),
     email: new FormControl('', [Validators.required, Validators.email])
   });
 
   loginFormCel: FormGroup = new FormGroup({
-    password: new FormControl('', [Validators.required,Validators.pattern(this.PASSWORD_PATTERN)]),
+    password: new FormControl('', [Validators.required, Validators.pattern(this.PASSWORD_PATTERN)]),
     email: new FormControl('', [Validators.required, Validators.email])
   });
 
   registerForm: FormGroup = new FormGroup({
-    user: new FormControl('', [Validators.required,Validators.minLength(3),Validators.maxLength(20)]),
-    password: new FormControl('', [Validators.required,Validators.pattern(this.PASSWORD_PATTERN)]),
-    repeatPassword: new FormControl('', [Validators.required,Validators.pattern(this.PASSWORD_PATTERN), this.samePassword()]),
+    user: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+    password: new FormControl('', [Validators.required, Validators.pattern(this.PASSWORD_PATTERN)]),
+    repeatPassword: new FormControl('', [Validators.required, Validators.pattern(this.PASSWORD_PATTERN), this.samePassword()]),
     email: new FormControl('', [Validators.required, Validators.email])
   });
 
   registerFormCel: FormGroup = new FormGroup({
-    user: new FormControl('', [Validators.required,Validators.minLength(3),Validators.maxLength(20)]),
-    password: new FormControl('', [Validators.required,Validators.pattern(this.PASSWORD_PATTERN)]),
-    repeatPassword: new FormControl('', [Validators.required,Validators.pattern(this.PASSWORD_PATTERN), this.samePassword()]),
+    user: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+    password: new FormControl('', [Validators.required, Validators.pattern(this.PASSWORD_PATTERN)]),
+    repeatPassword: new FormControl('', [Validators.required, Validators.pattern(this.PASSWORD_PATTERN), this.samePassword()]),
     email: new FormControl('', [Validators.required, Validators.email])
   });
-  showRepeatPasswordMob: boolean=false;
+
+  private subscriptions: Subscription[] = [];
+
   onSubmitLogin(): void {
     if (this.loginForm.valid || this.loginFormCel.valid) {
       this.loading = true;
       this.error = null;
   
-      const credentials = {
-        email: this.loginForm.get('email')?.value || this.loginFormCel.get('email')?.value,
-        password: this.loginForm.get('password')?.value || this.loginFormCel.get('password')?.value,
+      this.loginUser = {
+        email: this.loginForm.valid ? this.loginForm.get('email')?.value : this.loginFormCel.get('email')?.value,
+        password: this.loginForm.valid ? this.loginForm.get('password')?.value : this.loginFormCel.get('password')?.value,
       };
   
-      this.authService.login(credentials).subscribe({
-        next: (response) => {
-          console.log('Login successful');
-          this.router.navigate(['/dashboard'], { replaceUrl: true });
+      const loginSubscription = this.authService.login(this.loginUser).subscribe({
+        next: (response: TokenResponseDto) => {
+          Swal.fire({
+            icon: 'success',
+            title: '¡Inicio de sesión exitoso!',
+            text: 'Bienvenido de vuelta',
+            timer: 2000,
+            showConfirmButton: false,
+            customClass: {
+              title: 'custom-swal-title',
+              popup: 'custom-swal-content',
+              confirmButton: 'custom-swal-confirm-button'
+            }
+          }).then(() => {
+            this.router.navigate(['/dashboard'], { replaceUrl: true });
+            this.loginForm.reset();
+            this.loginFormCel.reset();
+          });
         },
         error: (error) => {
-          console.error('Login failed', error);
-          this.authService.logout(); 
-          if (error.status === 404) {
-            this.error = 'Usuario no encontrado';
-          } else if (error.status === 400) {
-            this.error = 'Datos inválidos';
-          } else {
-            this.error = 'Error del servidor';
+          this.authService.logout();
+          let errorMessage = 'Error desconocido';
+          if (error.status === 401) {
+            errorMessage = error.error?.message || 'Credenciales inválidas';
           }
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al iniciar sesión',
+            text: errorMessage || 'Error desconocido',
+            confirmButtonText: 'Entendido',
+            confirmButtonColor: '#33A3AA',
+            customClass: {
+              title: 'custom-swal-title',
+              popup: 'custom-swal-content',
+              confirmButton: 'custom-swal-confirm-button'
+            }
+          });          
           this.loading = false;
         },
         complete: () => {
           this.loading = false;
         }
       });
+  
+      this.subscriptions.push(loginSubscription);
     } else {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Formulario inválido',
+        text: 'Por favor, completa todos los campos requeridos correctamente',
+        confirmButtonText: 'Entendido',
+        confirmButtonColor: '#33A3AA',
+        customClass: {
+          title: 'custom-swal-title',
+          popup: 'custom-swal-content',
+          confirmButton: 'custom-swal-confirm-button'
+        }
+      });
+      
       this.loginForm.markAllAsTouched();
+      this.loginFormCel?.markAllAsTouched();
     }
   }
+
   onSubmitRegister(): void {
     if (this.registerForm.valid || this.registerFormCel.valid) {
       this.loading = true;
       this.error = null;
   
-      const user = {
-        name: this.registerForm.get('user')?.value || this.registerFormCel.get('user')?.value,
-        email: this.registerForm.get('email')?.value || this.registerFormCel.get('email')?.value,
-        password: this.registerForm.get('password')?.value || this.registerFormCel.get('password')?.value
+      this.registerUser = {
+        name: this.registerForm.valid ? this.registerForm.get('user')?.value : this.registerFormCel.get('user')?.value,
+        password: this.registerForm.valid ? this.registerForm.get('password')?.value : this.registerFormCel.get('password')?.value,
+        email: this.registerForm.valid ? this.registerForm.get('email')?.value : this.registerFormCel.get('email')?.value
       };
   
-      this.authService.register(user).subscribe({
+      const registerSubscription = this.authService.register(this.registerUser).subscribe({
         next: (response) => {
-          console.log('Register successful');
+          this.loading = false;
+          Swal.fire({
+            icon: 'success',
+            title: '¡Registro exitoso!',
+            text: 'Bienvenido a nuestra plataforma',
+            timer: 2000,
+            showConfirmButton: false,
+            customClass: {
+              title: 'custom-swal-title',
+              popup: 'custom-swal-content',
+              confirmButton: 'custom-swal-confirm-button'
+            }
+          }).then(() => {
+            this.router.navigate(['/dashboard'], { replaceUrl: true });
+            this.registerForm.reset();
+            this.registerFormCel.reset();
+          });
         },
         error: (error) => {
-          console.error('Register failed', error);
-          this.authService.logout(); 
-          if (error.status === 400) {
-            this.error = 'Invalid data request';
-          } else if (error.status === 500) {
-            this.error = 'Datos inválidos';
-          } else {
-            this.error = 'Error interno';
-          }
           this.loading = false;
+          this.authService.logout();
+          let errorMessage = '';
+  
+          if (error.status === 500) {
+            errorMessage = 'Error en el servidor';
+          }
+          Swal.fire({
+            icon: 'error',
+            title: 'Intente más tarde',
+            text: errorMessage || 'Error desconocido', 
+            confirmButtonText: 'Entendido',
+            confirmButtonColor: '#33A3AA',
+            customClass: {
+              title: 'custom-swal-title',
+              popup: 'custom-swal-content', 
+              confirmButton: 'custom-swal-confirm-button'
+            }
+          });
+          
+          
         },
         complete: () => {
           this.loading = false;
         }
       });
-    } else {
-      this.registerForm.markAllAsTouched();
-    }
-}
-
   
-
-  ngOnInit(): void {
-
+      this.subscriptions.push(registerSubscription);
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Formulario inválido',
+        text: 'Por favor, completa todos los campos requeridos correctamente',
+        confirmButtonText: 'Entendido',
+        confirmButtonColor: '#33A3AA'
+      });
+  
+      this.registerForm.markAllAsTouched();
+      this.registerFormCel?.markAllAsTouched();
+    }
   }
+
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
-
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
+
   samePassword() {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control.parent) return null;
@@ -141,18 +230,23 @@ export class LoginComponent implements OnInit, OnDestroy {
       return password.value === repeatPassword ? null : { samePassword: true };
     };
   }
-  togglePasswordVisibility(): void {
-    this.showPassword = !this.showPassword;
+
+  showPasswordLogin: boolean = false;
+  showPasswordRegister: boolean = false;
+  showRepeatPasswordRegister: boolean = false;
+
+  togglePasswordVisibilityRegister() {
+    this.showPasswordRegister = !this.showPasswordRegister;
   }
 
-
-  togglePasswordVisibilityy() :void{
-    this.showRepeatPasswordMob = !this.showRepeatPasswordMob;
-
-    }
-  togglePasswordVisibilityT(): void {
-    this.showRepeatPassword = !this.showRepeatPassword;
+  togglePasswordRepeatVisibilityRegister() {
+    this.showRepeatPasswordRegister = !this.showRepeatPasswordRegister;
   }
+
+  togglePasswordVisibilityLogin() {
+    this.showPasswordLogin = !this.showPasswordLogin;
+  }
+
   toggleView(): void {
     this.isLoginView = !this.isLoginView;
     this.isMobileView = !this.isMobileView;
@@ -161,5 +255,3 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
 }
-
-
