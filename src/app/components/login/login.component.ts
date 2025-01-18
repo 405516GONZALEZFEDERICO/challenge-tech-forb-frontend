@@ -1,12 +1,12 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AuthService } from '../../services/login-service/auth.service';
 import { Router } from '@angular/router';
 import { LoginUserDto, RegisterUserDto, TokenResponseDto } from '../../interfaces/auth';
 import { HttpResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
-import { Subscription } from 'rxjs';
+import { catchError, map, Observable, of, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -52,14 +52,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     user: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
     password: new FormControl('', [Validators.required, Validators.pattern(this.PASSWORD_PATTERN)]),
     repeatPassword: new FormControl('', [Validators.required, Validators.pattern(this.PASSWORD_PATTERN), this.samePassword()]),
-    email: new FormControl('', [Validators.required, Validators.email])
+    email: new FormControl('', [Validators.required, Validators.email], [this.emailAvailable()])
   });
 
   registerFormCel: FormGroup = new FormGroup({
     user: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
     password: new FormControl('', [Validators.required, Validators.pattern(this.PASSWORD_PATTERN)]),
     repeatPassword: new FormControl('', [Validators.required, Validators.pattern(this.PASSWORD_PATTERN), this.samePassword()]),
-    email: new FormControl('', [Validators.required, Validators.email])
+    email: new FormControl('', [Validators.required, Validators.email], [this.emailAvailable()])
   });
 
   private subscriptions: Subscription[] = [];
@@ -252,6 +252,19 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isMobileView = !this.isMobileView;
     this.loginForm.reset();
     this.registerForm.reset();
+  }
+  emailAvailable(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return this.authService.getUsers().pipe(
+        map(users => {
+          const exists = users.some(u => u.email === control.value);
+          return exists ? { emailExist: true } : null;
+        }),
+        catchError(() => {
+          return of(null);
+        })
+      );
+    };
   }
 
 }

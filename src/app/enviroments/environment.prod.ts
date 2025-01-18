@@ -13,5 +13,6 @@ export const environment = {
     postPlant:`${BASE_URL}plant/newPlant`,
     putPlant:`${BASE_URL}plant/updatePlant`,
     deletePlant:`${BASE_URL}plant/logicDown/`,
+    getUsers:`${BASE_URL}/user/getUsers`
   }
 };

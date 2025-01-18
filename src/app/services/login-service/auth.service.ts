@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, Observable, tap, throwError } from 'rxjs';
-import { TokenResponseDto } from '../../interfaces/auth';
+import { TokenResponseDto, User } from '../../interfaces/auth';
 import { environment } from '../../enviroments/environment.prod';
 
 @Injectable({
@@ -45,6 +45,24 @@ export class AuthService {
   }
   
 
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.API_URL.services.getUsers}`).pipe(
+      tap(response => {
+        console.log('Usuarios recibidos:', response); 
+      }),
+      catchError(error => {
+        const errorMessage = error.error?.message || 'Error al obtener users';
+        return throwError(() => ({
+          status: error.status,
+          error: {
+            message: errorMessage
+          }
+        }));
+      })
+    );
+  }
+  
 
 
   
