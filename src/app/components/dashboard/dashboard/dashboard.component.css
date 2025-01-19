@@ -56,7 +56,6 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 0 20px; 
 }
 
 .monitoreo-global-text {
@@ -499,7 +498,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  margin: 0; 
+
 }
 
 .text-foot {
@@ -527,6 +526,7 @@
   line-height: 18px;
   margin: 0;
   white-space: nowrap;
+  text-align: start;
 }
 
 .card-foot {
