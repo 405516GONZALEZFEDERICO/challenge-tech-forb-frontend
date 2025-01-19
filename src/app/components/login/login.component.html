@@ -29,14 +29,14 @@
           <div class="containerInput">
 
             <div class="inputEmail">
-              <input type="email" class="form-control" placeholder="Email" formControlName="email"
-                [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}">
+              <input type="email" class="form-control" placeholder="Email" formControlName="emailLogin"
+                [ngClass]="{'is-invalid': loginForm.get('emailLogin')?.invalid && loginForm.get('emailLogin')?.touched}">
               <label class="form-label">Email</label>
               <div class="invalid-feedback">
-                @if (loginForm.get('email')?.errors?.['required']) {
+                @if (loginForm.get('emailLogin')?.errors?.['required']) {
                 <span>El email es requerido</span>
                 }
-                @if (loginForm.get('email')?.errors?.['email']) {
+                @if (loginForm.get('emailLogin')?.errors?.['email']) {
                 <span>Ingresa un email valido</span>
                 }
               </div>
@@ -44,8 +44,8 @@
 
             <div class="inputPassword">
               <input [type]="showPasswordLogin ? 'text' : 'password'" class="form-control" placeholder="Contraseña"
-                formControlName="password"
-                [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}">
+                formControlName="passwordLogin"
+                [ngClass]="{'is-invalid': loginForm.get('passwordLogin')?.invalid && loginForm.get('passwordLogin')?.touched}">
               <label class="form-label">Contraseña</label>
 
               <svg class="eye-icon" width="18" height="12" viewBox="0 0 18 12" fill="none"
@@ -57,10 +57,10 @@
 
 
               <div class="invalid-feedback">
-                @if (loginForm.get('password')?.errors?.['required']) {
+                @if (loginForm.get('passwordLogin')?.errors?.['required']) {
                 <span>La contraseña es requerida</span>
                 }
-                @if (loginForm.get('password')?.errors?.['pattern']) {
+                @if (loginForm.get('passwordLogin')?.errors?.['pattern']) {
                 <span>La contraseña es no es valida</span>
                 }
 
@@ -73,10 +73,13 @@
               </div>
               <button type="submit" class="loginButton" [disabled]="loading">
                 <div class="button-content">
-                  <span *ngIf="!loading">Iniciar sesión</span>
-                  <div *ngIf="loading" class="spinner-container">
-                    <div class="spinner"></div>
-                    <span>Cargando...</span>
+                  <div class="button-content">
+                    @if(!loading){
+                      <span >Registrarse</span>
+                    }
+                    @if (loading) {
+                      <span>Cargando...</span>
+                    }
                   </div>
                 </div>
               </button>
@@ -101,14 +104,7 @@
 
 
 
-
-
-
-
-
-
-
-<ng-template #registerTemplate>
+ <ng-template #registerTemplate>
   <div class="container">
     <div class="image">
       <div class="initSession">Registrarse</div>
@@ -196,28 +192,27 @@
             </div>
 
             <div class="inputPassword">
-              <input [type]="showRepeatPasswordRegister ? 'text' : 'password'" class="form-control"
-                placeholder="Repetir contraseña" formControlName="repeatPassword"
-                [ngClass]="{'is-invalid': registerForm.get('repeatPassword')?.invalid && registerForm.get('repeatPassword')?.touched}">
+              <input 
+                [type]="showRepeatPasswordRegister ? 'text' : 'password'" 
+                class="form-control"
+                placeholder="Repetir contraseña" 
+                formControlName="repeatPassword"
+                [ngClass]="{'is-invalid': registerForm.get('repeatPassword')?.touched && 
+                  (registerForm.get('repeatPassword')?.errors || registerForm.errors?.['passwordsMatch'])}">
               <label class="form-label">Repetir contraseña</label>
-            
               <svg class="eye-icon" width="18" height="12" viewBox="0 0 18 12" fill="none"
-                xmlns="http://www.w3.org/2000/svg" (click)="togglePasswordRepeatVisibilityRegister()">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M9 2.28882e-05C4.90909 2.28882e-05 1.41545 2.48802 0 6.00002C1.41545 9.51202 4.90909 12 9 12C13.0909 12 16.5845 9.51202 18 6.00002C16.5845 2.48802 13.0909 2.28882e-05 9 2.28882e-05ZM8.99924 10C6.74106 10 4.90833 8.208 4.90833 6C4.90833 3.792 6.74106 2 8.99924 2C11.2574 2 13.0901 3.792 13.0901 6C13.0901 8.208 11.2574 10 8.99924 10ZM8.99949 3.59959C7.64131 3.59959 6.54494 4.67159 6.54494 5.99959C6.54494 7.32759 7.64131 8.39959 8.99949 8.39959C10.3577 8.39959 11.454 7.32759 11.454 5.99959C11.454 4.67159 10.3577 3.59959 8.99949 3.59959Z"
-                  fill="#84818A" />
+              xmlns="http://www.w3.org/2000/svg" (click)="togglePasswordVisibilityRegister()">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M9 2.28882e-05C4.90909 2.28882e-05 1.41545 2.48802 0 6.00002C1.41545 9.51202 4.90909 12 9 12C13.0909 12 16.5845 9.51202 18 6.00002C16.5845 2.48802 13.0909 2.28882e-05 9 2.28882e-05ZM8.99924 10C6.74106 10 4.90833 8.208 4.90833 6C4.90833 3.792 6.74106 2 8.99924 2C11.2574 2 13.0901 3.792 13.0901 6C13.0901 8.208 11.2574 10 8.99924 10ZM8.99949 3.59959C7.64131 3.59959 6.54494 4.67159 6.54494 5.99959C6.54494 7.32759 7.64131 8.39959 8.99949 8.39959C10.3577 8.39959 11.454 7.32759 11.454 5.99959C11.454 4.67159 10.3577 3.59959 8.99949 3.59959Z"
+                fill="#84818A" />
               </svg>
               <div class="invalid-feedback">
                 @if (registerForm.get('repeatPassword')?.errors?.['required']) {
-                <span>Ingresa una contraseña</span>
+                  <span>Ingresa una contraseña</span>
                 }
-                @if (registerForm.get('repeatPassword')?.errors?.['pattern']) {
-                <span>La contraseña es no es valida</span>
+                @if (registerForm.errors?.['passwordsMatch']) {
+                  <span>Las contraseñas no coinciden</span>
                 }
-                @if (registerForm.get('repeatPassword')?.errors?.['samePassword']) {
-                <span>La contraseña no coincide</span>
-                }
-
               </div>
             </div>
 
@@ -229,11 +224,13 @@
               </ul>
               <button type="submit" class="loginButton">
                 <div class="button-content">
-                  <span *ngIf="!loading">Registrarse</span>
-                  <div *ngIf="loading" class="spinner-container">
-                    <div class="spinner"></div>
+                  @if(!loading){
+                    <span >Registrarse</span>
+                  }
+                  @if (loading) {
                     <span>Cargando...</span>
-                  </div>
+                  }
+                  
                 </div>
               </button>
             </div>
@@ -245,232 +242,6 @@
           <span class="highlight" (click)="toggleView()">Iniciar sesión</span>
         </div>
       </div>
-    </div>
-  </div>
-</ng-template> 
-
-
-
-
-
-
-
-
-
-
- <ng-container *ngIf="isMobileView; else registerTemplateCel">
-  <div class="login-small">
-
-    <div class="login-small-logo">
-      <div class="logo-placeholder"></div>
-    </div>
-    <div class="iniciarSesionBoxText">
-      <h1 class="login-small-title">Iniciar sesión</h1>
-    </div>
-    <div class="login-small-content">
-
-      <form class="login-small-form" [formGroup]="loginFormCel" (ngSubmit)="onSubmitLogin()">
-        <div class="container-small-inputs">
-          <div class="login-small-input">
-            <div class="container-small-text">
-              <label class="email-small-text" class="text-email-small">Email</label>
-            </div>
-            <div class="container-small-input">
-              <input type="email" class="email-small-input" placeholder="Ingresa tu correo electrónico"
-                formControlName="email"
-                [ngClass]="{'is-invalid': loginFormCel.get('email')?.invalid && loginFormCel.get('email')?.touched}">
-              <div class="invalid-feedback">
-                @if (loginFormCel.get('email')?.errors?.['required']) {
-                <span>El email es requerido</span>
-                }
-                @if (loginFormCel.get('email')?.errors?.['email']) {
-                <span>Ingresa un email valido</span>
-                }
-              </div>
-            </div>
-          </div>
-          <div class="login-small-input">
-            <div class="container-small-text">
-              <label class="pass-small-text">Contraseña</label>
-            </div>
-            <div class="password-input-container">
-              <input [type]="showPasswordLogin ? 'text' : 'password'" class="password-small-input" placeholder="Contraseña"
-                formControlName="password"
-                [ngClass]="{'is-invalid': loginFormCel.get('password')?.invalid && loginFormCel.get('password')?.touched}">
-
-            
-              <svg class="eye-icon" width="18" height="12" viewBox="0 0 18 12" fill="none"
-                xmlns="http://www.w3.org/2000/svg" (click)="togglePasswordVisibilityLogin()">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M9 2.28882e-05C4.90909 2.28882e-05 1.41545 2.48802 0 6.00002C1.41545 9.51202 4.90909 12 9 12C13.0909 12 16.5845 9.51202 18 6.00002C16.5845 2.48802 13.0909 2.28882e-05 9 2.28882e-05ZM8.99924 10C6.74106 10 4.90833 8.208 4.90833 6C4.90833 3.792 6.74106 2 8.99924 2C11.2574 2 13.0901 3.792 13.0901 6C13.0901 8.208 11.2574 10 8.99924 10ZM8.99949 3.59959C7.64131 3.59959 6.54494 4.67159 6.54494 5.99959C6.54494 7.32759 7.64131 8.39959 8.99949 8.39959C10.3577 8.39959 11.454 7.32759 11.454 5.99959C11.454 4.67159 10.3577 3.59959 8.99949 3.59959Z"
-                  fill="#84818A" />
-              </svg>
-              <div class="invalid-feedback">
-                @if (loginFormCel.get('password')?.errors?.['required']) {
-                <span>La contraseña es requerida</span>
-                }
-                @if (loginFormCel.get('password')?.errors?.['pattern']) {
-                <span>La contraseña es no es valida</span>
-                }
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="foot-container">
-          <button type="submit" class="btn-small-login" >
-            <div class="button-content">
-              <span *ngIf="!loading">Iniciar sesión</span>
-              <div *ngIf="loading" class="spinner-container">
-                <div class="spinner"></div>
-                <span>Cargando...</span>
-              </div>
-            </div>
-          </button>
-          <div class="containerFootForm">
-            <div class="nonAcountmobile">
-              ¿No tienes una cuenta?
-              <span class="highlight" (click)="toggleView()">Regístrate</span>
-            </div>
-          </div>
-        </div>
-        
-      </form>
-    </div>
-  </div>
-</ng-container> 
-
-
-
-
-
-
-
-<ng-template #registerTemplateCel>
-  <div class="login-small">
-    <div class="login-small-logo">
-      <div class="logo-placeholder"></div>
-    </div>
-    <div class="login-small-content">
-      <div class="iniciarSesionBoxText">
-        <h1 class="login-small-title">Registrarse</h1>
-      </div>
-      <form class="login-small-form" [formGroup]="registerFormCel" (ngSubmit)="onSubmitRegister()">
-        <div class="container-small-inputs">
-          <div class="login-small-input">
-            <div class="container-small-text">
-              <label class="email-small-text" class="text-email-small">Usuario</label>
-            </div>
-            <div class="container-small-input">
-              <input type="email" class="email-small-input" placeholder="Ingresa tu nombre deusuario"
-                formControlName="user"
-                [ngClass]="{'is-invalid': registerFormCel.get('user')?.invalid && registerFormCel.get('user')?.touched}">
-              <div class="invalid-feedback">
-                @if (registerFormCel.get('user')?.errors?.['required']) {
-                <span>El user es requerido</span>
-                }
-                @if (registerFormCel.get('user')?.errors?.['minlength']) {
-                <span>Ingresa al menos 3 caracteres</span>
-                }
-                @if (registerFormCel.get('user')?.errors?.['maxlength']) {
-                <span>Ingresa maximo 50 caracteres</span>
-                }
-              </div>
-            </div>
-
-          </div>
-          <div class="login-small-input">
-            <div class="container-small-text">
-              <label class="email-small-text" class="text-email-small">Email</label>
-            </div>
-            <div class="container-small-input">
-              <input type="email" class="email-small-input" placeholder="Ingresa tu correo electrónico"
-                formControlName="email"
-                [ngClass]="{'is-invalid': registerFormCel.get('email')?.invalid && registerFormCel.get('email')?.touched}">
-              <div class="invalid-feedback">
-                @if (registerFormCel.get('email')?.errors?.['required']) {
-                <span>El email es requerido</span>
-                }
-                @if (registerFormCel.get('email')?.errors?.['email']) {
-                <span>Ingresa un email valido</span>
-                }
-              </div>
-            </div>
-          </div>
-          <div class="login-small-input">
-            <div class="container-small-text">
-              <label class="pass-small-text">Contraseña</label>
-            </div>
-            <div class="password-input-container">
-              <input [type]="showPasswordRegister ? 'text' : 'password'" class="password-small-input" placeholder="Contraseña"
-                formControlName="password"
-                [ngClass]="{'is-invalid': registerFormCel.get('password')?.invalid && registerFormCel.get('password')?.touched}">
-
-                <svg class="eye-icon" width="18" height="12" viewBox="0 0 18 12" fill="none"
-                xmlns="http://www.w3.org/2000/svg" (click)="togglePasswordVisibilityRegister()">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M9 2.28882e-05C4.90909 2.28882e-05 1.41545 2.48802 0 6.00002C1.41545 9.51202 4.90909 12 9 12C13.0909 12 16.5845 9.51202 18 6.00002C16.5845 2.48802 13.0909 2.28882e-05 9 2.28882e-05ZM8.99924 10C6.74106 10 4.90833 8.208 4.90833 6C4.90833 3.792 6.74106 2 8.99924 2C11.2574 2 13.0901 3.792 13.0901 6C13.0901 8.208 11.2574 10 8.99924 10ZM8.99949 3.59959C7.64131 3.59959 6.54494 4.67159 6.54494 5.99959C6.54494 7.32759 7.64131 8.39959 8.99949 8.39959C10.3577 8.39959 11.454 7.32759 11.454 5.99959C11.454 4.67159 10.3577 3.59959 8.99949 3.59959Z"
-                  fill="#84818A" />
-              </svg>
-
-              <div class="invalid-feedback">
-                @if (registerFormCel.get('password')?.errors?.['required']) {
-                <span>La contraseña es requerida</span>
-                }
-                @if (registerFormCel.get('password')?.errors?.['pattern']) {
-                <span>La contraseña es no es valida</span>
-                }
-              </div>
-            </div>
-          </div>
-          <div class="login-small-input">
-            <div class="container-small-text">
-              <label class="pass-small-text2">Repetir contraseña</label>
-            </div>
-            <div class="password-input-container">
-              <input [type]="showRepeatPasswordRegister ? 'text' : 'password'" class="password-small-input"
-                placeholder="Repetir tu contraseña" formControlName="repeatPassword"
-                [ngClass]="{'is-invalid': registerFormCel.get('repeatPassword')?.invalid && registerFormCel.get('repeatPassword')?.touched}">
-
-                <svg class="eye-icon" width="18" height="12" viewBox="0 0 18 12" fill="none"
-                xmlns="http://www.w3.org/2000/svg" (click)="togglePasswordRepeatVisibilityRegister()">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M9 2.28882e-05C4.90909 2.28882e-05 1.41545 2.48802 0 6.00002C1.41545 9.51202 4.90909 12 9 12C13.0909 12 16.5845 9.51202 18 6.00002C16.5845 2.48802 13.0909 2.28882e-05 9 2.28882e-05ZM8.99924 10C6.74106 10 4.90833 8.208 4.90833 6C4.90833 3.792 6.74106 2 8.99924 2C11.2574 2 13.0901 3.792 13.0901 6C13.0901 8.208 11.2574 10 8.99924 10ZM8.99949 3.59959C7.64131 3.59959 6.54494 4.67159 6.54494 5.99959C6.54494 7.32759 7.64131 8.39959 8.99949 8.39959C10.3577 8.39959 11.454 7.32759 11.454 5.99959C11.454 4.67159 10.3577 3.59959 8.99949 3.59959Z"
-                  fill="#84818A" />
-              </svg>
-
-              <div class="invalid-feedback">
-                @if (registerFormCel.get('repeatPassword')?.errors?.['required']) {
-                <span>Ingresa una contraseña</span>
-                }
-                @if (registerFormCel.get('repeatPassword')?.errors?.['pattern']) {
-                <span>La contraseña es no es valida</span>
-                }
-                @if (registerFormCel.get('repeatPassword')?.errors?.['samePassword']) {
-                <span>La contraseña no coincide</span>
-                }
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="top2">
-          <button type="submit" class="btn-small-login">
-            <div class="button-content">
-              <span *ngIf="!loading">Registrarse</span>
-              <div *ngIf="loading" class="spinner-container">
-                <div class="spinner"></div>
-                <span>Cargando...</span>
-              </div>
-            </div>
-          </button>
-          <div class="containerFootForm">
-            <div class="nonAcountmobile">
-              ¿Ya tienes una cuenta?
-              <span class="highlight" (click)="toggleView()">Iniciar sesión</span>
-            </div>
-          </div>
-        </div>
-      </form>
     </div>
   </div>
 </ng-template> 

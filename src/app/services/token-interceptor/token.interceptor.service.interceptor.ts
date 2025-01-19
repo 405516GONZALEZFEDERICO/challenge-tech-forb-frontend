@@ -8,7 +8,7 @@ let isRefreshing = false;
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const auth = inject(AuthService);
   
-  if (req.url.includes('/login') || req.url.includes('/refresh')) {
+  if (req.url.includes('/login') || req.url.includes('/refresh') ) {
     return next(req);
   }
 
@@ -23,7 +23,6 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
           isRefreshing = false;
           const newAccessToken = auth.getToken();
       
-          // Clonar la solicitud original con el nuevo access token
           const newReq = req.clone({
             setHeaders: {
               'Authorization': `Bearer ${newAccessToken}`
@@ -41,7 +40,6 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
     }
   }
 
-  // Si hay token válido, añadirlo
   if (accessToken) {
     req = req.clone({
       setHeaders: {

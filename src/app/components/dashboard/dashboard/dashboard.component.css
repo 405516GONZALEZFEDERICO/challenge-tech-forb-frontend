@@ -14,17 +14,14 @@
   position: relative;
 }
 
-
 .main-content {
   flex: 1;
   color: black;
   height: 900px;
   width: 1440px;
   position: relative;
-  z-index: 1;
-  z-index: 999; 
+  z-index: 999;
 }
-
 
 .main-content::before {
   content: '';
@@ -34,7 +31,6 @@
   margin-left: 81px;
   background-color: rgba(51, 163, 170, 0.1);
   z-index: -1;
-
 }
 
 .containerFluid {
@@ -56,20 +52,19 @@
 .top {
   width: 1262px;
   height: 45px;
-  gap: 0px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px; 
 }
 
 .monitoreo-global-text {
   font-family: 'Poppins', sans-serif;
-  font-size: 30px;
-  font-weight: 500;
-  line-height: 45px;
-  text-align: left;
-  text-underline-position: from-font;
-  text-decoration-skip-ink: none;
-  color: #000000;
+    font-size: 30px;
+    font-weight: 500;
+    color: #000000;
+    white-space: nowrap;
 }
 
 .icons-container {
@@ -80,25 +75,21 @@
   justify-content: space-between;
   white-space: nowrap;
   list-style-type: none;
-  gap:10px;
+  gap: 10px;
 }
 
 .nombre-auth {
-  opacity: 1px;
+  opacity: 1;
   font-family: 'Poppins', sans-serif;
-
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
-
 }
-
 
 .cards-general-stats {
   padding-top: 12px;
-
   width: 1262px;
   height: 110px;
-  opacity: 1px;
+  opacity: 1;
   display: flex;
   justify-content: space-between;
 }
@@ -106,11 +97,8 @@
 .card-item {
   width: 290px;
   height: 110px;
-  gap: 0px;
   border-radius: 15px;
-  opacity: 0px;
   background-color: #FFFFFF;
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -122,8 +110,7 @@
   margin-top: 31px;
   margin-left: 40px;
   margin-bottom: 31px;
-  gap: 0px;
-  opacity: 1px;
+  opacity: 1;
   display: flex;
   flex-direction: column;
   white-space: nowrap;
@@ -134,7 +121,6 @@
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
-
 }
 
 .icon-right {
@@ -144,14 +130,11 @@
   margin-left: 20px;
 }
 
-
 .percents {
   width: 61.04px;
   height: 30px;
   top: 49px;
   left: 18.23px;
-  gap: 0px;
-  opacity: 0px;
   font-family: 'Poppins', sans-serif;
   font-size: 20px;
   font-weight: 700;
@@ -159,7 +142,6 @@
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
-
 }
 
 .container-table {
@@ -168,14 +150,15 @@
   border-radius: 15px;
   background-color: white;
   margin-top: 20px;
-  overflow: hidden; 
+  overflow: hidden;
 }
-
+.new-plant{
+  margin-top: 20px;
+  margin-left: 20px;
+}
 .text-new-plant {
   width: 62px;
   height: 24px;
-  gap: 0px;
-  opacity: 0px;
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -184,6 +167,7 @@
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   color: #000000;
+  margin-top: 10px;
 }
 
 .button-new-plant {
@@ -199,13 +183,9 @@
   margin-left: 10px;
 }
 
-
-
-
 .text-button {
   width: 130px;
   height: 18px;
-  gap: 0px;
   font-family: 'Poppins', sans-serif;
   font-size: 12px;
   font-weight: 500;
@@ -214,25 +194,32 @@
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
 }
+.search-input {
 
+  width: 250px;
+  height: 20px;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  margin-left: 720px;
+  border: 1px solid #B0CAD1;
+  margin-top: 20px;
 
+}
 
-
-
-
-
-
-
-
-
+.search-input:focus {
+  outline: none; 
+}
 .country {
   margin-left: 30px;
   width: 95px;
   height: 21px;
-  gap: 0px;
-  opacity: 0px;
-
-
+  width: 15%;
 }
 
 .countrySpan {
@@ -244,16 +231,14 @@
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   color: #B0CAD1;
-
 }
-
 
 .namePlant {
   width: 196px;
   height: 21px;
-  gap: 0px;
-  opacity: 0px;
   margin-left: 90px;
+  text-align: start;
+  width: 20%;
 }
 
 .plantName {
@@ -266,14 +251,11 @@
   text-decoration-skip-ink: none;
   white-space: nowrap;
   color: #B0CAD1;
-
 }
 
 .th {
   width: 196px;
   height: 21px;
-  gap: 0px;
-  opacity: 0px;
 }
 
 .okLecture {
@@ -287,7 +269,6 @@
   white-space: nowrap;
 }
 
-
 .table-container {
   height: calc(100% - 80px);
   overflow-y: auto;
@@ -295,13 +276,9 @@
 }
 
 .svg-table-lecture {
-  gap: 4px;
   width: 14px;
   height: 14px;
-  gap: 0px;
-  opacity: 0px;
   margin-left: 3.5px;
-
 }
 
 .tHead {
@@ -315,6 +292,7 @@
   height: 48px;
   background: white;
 }
+
 .tHead th {
   padding: 15px 30px;
   text-align: left;
@@ -324,34 +302,11 @@
   top: 0;
 }
 
-.country {
-  width: 15%;
-}
-
-.namePlant {
-  text-align: start;
-}
-
-.namePlant {
-  width: 20%;
-}
-
 .table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
 }
-
-
-table td {
-  margin-left: 10px;
-}
-
-
-
-
-
-
 
 .container-lecturas-table {
   display: flex;
@@ -362,84 +317,41 @@ table td {
 .line {
   margin-left: 15px;
 }
+
 .tBody tr {
   height: 48px;
 }
-
-
 
 .tBody td {
   padding: 10px 8px;
   vertical-align: middle;
 }
 
-
-
-.plat-row:hover td:last-child {
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+.plat-row {
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .plat-row:hover {
   background-color: #EFF2F7;
-}
-
-.new-plant {
-  position: sticky;
-  top: 0;
-  background: white;
-  z-index: 3;
-  padding: 15px 25px;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-
-
-}
-
-
-
-
-.plat-row {
-  cursor: pointer;
-  transition: all 0.3s ease;
-
 }
 
 .plat-row:hover td:first-child {
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   margin-left: 15px;
-
 }
 
 .plat-row:hover td:last-child {
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   margin-right: 10px;
-
 }
-
-.plat-row:hover {
-  background-color: #EFF2F7;
-}
-
 
 .plat-row td {
   padding: 10px 8px;
   vertical-align: middle;
 }
-
-table {
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-
-
-
-
-
-
 
 .flag-flex {
   width: auto;
@@ -459,7 +371,7 @@ table {
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   color: #000000;
-  margin-bottom: 0px;
+  margin-bottom: 0;
   margin-left: 23px;
 }
 
@@ -473,7 +385,7 @@ table {
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   color: #000000;
-  margin-bottom: 0px
+  margin-bottom: 0;
 }
 
 .flag {
@@ -500,52 +412,27 @@ table {
   justify-content: center;
   text-align: right;
   margin-left: 30px;
+  border-radius: 4px;
+}
+
+.svg-row:hover {
+  background-color: #f5f5f5;
 }
 
 .countryConteiner {
   display: flex;
   width: 95.07px;
   height: 18px;
-  gap: 0px;
   opacity: 1;
   flex-direction: row;
   white-space: nowrap;
   background-color: #000000;
 }
 
-
-
-
-
-
 .dropdown {
   position: relative;
   display: inline-block;
   cursor: pointer;
-}
-
-.svg-row {
-  padding: 8px;
-  border-radius: 4px;
-}
-
-.svg-row:hover {
-  background-color: #f5f5f5;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.svg-row {
-  padding: 8px;
-  border-radius: 4px;
-}
-
-.svg-row:hover {
-  background-color: #f5f5f5;
 }
 
 .dropdown-content {
@@ -560,7 +447,6 @@ table {
   z-index: 1000;
   margin-top: 4px;
   font-family: 'Poppins', sans-serif;
-
 }
 
 .dropdown-content.show {
@@ -595,15 +481,13 @@ table {
   gap: 15px;
   border-radius: 15px;
   margin-top: 20px;
-
 }
 
 .footer-container-ta {
   width: 179px;
   height: 47px;
   gap: 5px;
-  opacity: 1px;
-
+  opacity: 1;
 }
 
 .con {
@@ -614,8 +498,6 @@ table {
 .text-foot {
   width: 179px;
   height: 24px;
-  gap: 0px;
-  opacity: 0px;
   font-family: 'Poppins', sans-serif;
   color: #000000;
   font-size: 16px;
@@ -626,29 +508,16 @@ table {
   text-decoration-skip-ink: none;
 }
 
-.flag-foot {
+.flag-foot, .ff {
   width: 18px;
   height: 12.38px;
-  gap: 0px;
-  opacity: 0px;
-  
-}
-
-.ff {
-  width: 18px;
-  height: 12.38px;
-  gap: 0px;
-  opacity: 0px;
-
 }
 
 .nameCountryPlant {
-  min-width: 101px;           
-  width: auto;                
-  max-width: 150px;   
+  min-width: 101px;
+  width: auto;
+  max-width: 150px;
   height: 18px;
-  gap: 0px;
-  opacity: 0px;
   font-family: 'Poppins', sans-serif;
   font-size: 12px;
   font-weight: 600;
@@ -657,17 +526,15 @@ table {
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   margin-left: 3px;
-  white-space: nowrap;        
-  overflow: hidden;            
-  text-overflow: ellipsis;    
-
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card-foot {
   width: 1262px;
   height: 200px;
-  gap: 0px;
-  opacity: 1px;
+  opacity: 1;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -678,9 +545,8 @@ table {
   width: 290px;
   height: 90px;
   top: 62px;
-  gap: 0px;
   border-radius: 15px;
-  opacity: 1px;
+  opacity: 1;
   background-color: #FFFFFF;
   margin-top: 15px;
 }
@@ -711,8 +577,6 @@ table {
   height: 18px;
   top: 88px;
   left: 19px;
-  gap: 0px;
-  opacity: 0px;
   font-family: 'Poppins', sans-serif;
   font-size: 12px;
   font-weight: 400;
@@ -723,20 +587,10 @@ table {
   margin-bottom: 8px;
 }
 
-.check {
+.check, .med, .red {
   display: flex;
   align-items: center;
   gap: 5px;
-}
-
-.med {
-  display: flex;
-  align-items: center;
-}
-
-.red {
-  display: flex;
-  align-items: center;
 }
 
 .icon-foot {
@@ -745,17 +599,163 @@ table {
   margin: 15px 30px 15px 0;
 }
 
-.foot-car-txt {
+
+
+
+
+
+
+
+
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+
+.popup {
+  margin-left: 150px;
+  border-radius: 15px;
+  padding: 30px;
+  width: 380px;
+  height: 300px;
+  opacity: 1;
+  background-color: white;
+}
+
+.popup-title {
+  width: 138px;
+  height: 21px;
   font-family: 'Poppins', sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 18px;
-  color: #000000;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
   text-align: left;
+  color: #000000;
+  z-index: 1001;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  height: 42px;
+  border-radius: 7.43px;
+  border: 0.93px solid #C6C9D2;
+  padding-left: 20px;
+  padding-right: 30px;
+  color: #BABEC5;
+
+
+}
+
+
+.name-plant {
+  margin-bottom: 16px;
+  position: relative;
+
+}
+
+
+.label-txt {
+  display: block;
+  margin-bottom: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  text-align: left;
+}
+
+
+
+
+
+.input-group input.input-name-plant {
+  width: 86%;
+}
+
+
+.button-group {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 35px;
+  margin-left: 85px;
+  margin-right: 85px;
+}
+
+.cancel-btn,
+.create-btn {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  border: 1px solid #33A3AA;
+  color: #33A3AA;
+  background-color: white;
+  width: 100px;
+  height: 36px;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  text-align: center;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
 
+}
 
+.create-btn {
+  background-color: #33A3AA;
+  color: white;
+  width: 100px;
+  height: 36px;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+
+}
+
+
+
+
+.invalid-feedback {
+  display: none;
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 8px;
+  margin-left: 16px;
+  font-family: 'PP Neue Montreal', sans-serif;
+
+}
+
+
+.name-plant input.ng-invalid.ng-touched+.invalid-feedback,
+.name-plant select.ng-invalid.ng-touched+.invalid-feedback {
+  display: block;
+}
+
+
+input::placeholder,
+select::placeholder {
+  color: #BABEC5;
+  opacity: 1;
 }
 
 
@@ -764,4 +764,129 @@ table {
 
 
 
+
+
+
+
+
+
+
+.edit-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.edit-modal {
+  margin-left: 142px;
+  background: #FFFFFF;
+  border-radius: 15px;
+  width: 740px;
+  padding: 20px 30px;
+  margin-bottom: 10px;
+}
+
+.edit-modal-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.edit-form-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 40px; 
+}
+
+.edit-input-wrapper {
+  flex: 1 1 calc(50% - 10px);
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+  margin-right: 20px;
+}
+
+
+.edit-label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.edit-input {
+  width: 100%;
+  height: 42px;
+  border-radius: 7.43px;
+  border: 0.93px solid #C6C9D2;
+  padding: 0 20px;
+  color: #333;
+}
+
+.edit-input::placeholder {
+  color: #BABEC5;
+}
+
+.edit-input-invalid {
+  border-color: #dc3545;
+}
+
+.edit-error-message {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.edit-button-group {
+  display: flex;
+  justify-content: center; 
+  gap: 10px;  
+}
+
+.edit-cancel-btn, .edit-submit-btn {
+  display: flex;
+  align-items: center;  
+  justify-content: center;  
+}
+
+.edit-cancel-btn {
+  padding: 8px 24px;
+  border: 1px solid #33A3AA;
+  color: #33A3AA;
+  background-color: white;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  width: 100px;
+}
+
+.edit-submit-btn {
+  padding: 8px 24px;
+  background-color: #33A3AA;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  width: 100px;
+
+}
 

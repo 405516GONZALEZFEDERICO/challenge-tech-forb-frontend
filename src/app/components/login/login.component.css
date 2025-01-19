@@ -1,15 +1,10 @@
 .container {
     width: 1440px;
     height: 942px;
-    gap: 0px;
-    opacity: 0px;
+    gap: 0;
     position: relative;
     margin: 0 auto;
-    user-select: none;  
-    width: 1440px;
-
-
-
+    user-select: none;
 }
 
 .image {
@@ -17,12 +12,11 @@
     left: 0;
     width: 796px;
     height: 900px;
-    margin-left: 27px;
+    margin-left: 30px;
     background-image: url('/login/imageFondo.png');
     background-size: 796px 900px;
     background-repeat: no-repeat;
     z-index: 0;
-
 }
 
 .image::before {
@@ -48,8 +42,7 @@
     z-index: 2;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
-    opacity: 0px;
-    gap: 0px;
+    gap: 0;
 }
 
 .initSession {
@@ -66,8 +59,6 @@
     color: #FFFFFF;
     opacity: 1;
     z-index: 3;
-
-
 }
 
 .paragraph {
@@ -76,15 +67,12 @@
     height: 72px;
     top: 387px;
     left: 128px;
-    gap: 0px;
-    opacity: 0px;
+    gap: 0;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 24px;
     text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
     color: #FFFFFF;
     opacity: 1;
     z-index: 3;
@@ -120,18 +108,14 @@
     height: 55px;
     top: 260px;
     left: 907px;
-    gap: 0px;
-    opacity: 0px;
+    gap: 0;
     font-family: 'Poppins', sans-serif;
     font-size: 36.48px;
     font-weight: 600;
     line-height: 54.71px;
     text-align: left;
     white-space: nowrap;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
     color: #202020;
-
 }
 
 .logContainer {
@@ -143,9 +127,7 @@
     height: 48px;
     top: 315px;
     left: 907px;
-    gap: 0px;
-    opacity: 0px;
-
+    gap: 0;
 }
 
 .isesiontext {
@@ -154,20 +136,16 @@
     font-weight: 500;
     line-height: 48px;
     text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
     white-space: nowrap;
     color: #202020;
-
 }
 
 .inputEmail,
 .inputPassword {
     margin-right: 18px;
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     color: #202020;
-
 }
 
 .inputEmail input,
@@ -193,10 +171,6 @@
     line-height: 21px;
 }
 
-.inputPassword {
-    position: relative;
-}
-
 .eye-icon {
     position: absolute;
     right: 19px;
@@ -205,6 +179,7 @@
     width: 18px;
     height: 12px;
     cursor: pointer;
+    z-index: 2;
 }
 
 .eye-icon path {
@@ -216,18 +191,10 @@
     height: 48px;
     border: 1px solid #DCDBDD;
     padding: 0 16px;
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     font-size: 14px;
     outline: none;
-    width: 393px;
-    height: 48px;
-    top: 403px;
-    left: 907px;
-    gap: 0px;
     border-radius: 12px;
-    border: 1px 0px 0px 0px;
-    opacity: 0px;
-
 }
 
 .form-label {
@@ -235,30 +202,20 @@
     left: 16px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 14px;
     color: #84818A;
     transition: 0.3s;
     pointer-events: none;
-
-
     padding: 0 4px;
-}
-
-.form-control,
-.form-label {
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
     font-weight: 400;
     line-height: 17px;
     text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-
 }
 
-.form-control:focus~.form-label,
-.form-control:not(:placeholder-shown)~.form-label,
-.form-control.is-invalid~.form-label {
+.form-control:focus ~ .form-label,
+.form-control:not(:placeholder-shown) ~ .form-label,
+.form-control.is-invalid ~ .form-label {
     top: 0;
     z-index: 1;
 }
@@ -267,7 +224,7 @@
     border-color: #dc3545;
 }
 
-.form-control.is-invalid~.form-label {
+.form-control.is-invalid ~ .form-label {
     color: #dc3545;
 }
 
@@ -285,8 +242,6 @@ form {
     font-weight: 400;
     line-height: 21px;
     text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
     white-space: nowrap;
     margin-top: 15px;
 }
@@ -294,17 +249,17 @@ form {
 .requiredPassword {
     display: flex;
     flex-direction: column;
-    width: 178px; 
+    width: 178px;
     height: 48px;
     color: #84818A;
-    font-size: 14px; 
-    margin-top: 8px; 
-    opacity: 1; 
-    list-style-type:    none; 
-    padding-left: 0px; 
-    margin-top: 0px;
+    font-size: 14px;
+    margin-top: 0;
+    opacity: 1;
+    list-style-type: none;
+    padding-left: 0;
 }
-.containerButton{
+
+.containerButton {
     display: flex;
     flex-direction: row;
     gap: 20px;
@@ -315,12 +270,9 @@ form {
 .containerButton2 {
     display: flex;
     flex-direction: row;
-    gap: 20px;
     z-index: 3;
     justify-content: space-between;
-    padding-top: 20px;}
-
-
+}
 
 .loginButton {
     width: 164px;
@@ -328,7 +280,7 @@ form {
     top: 539px;
     margin-right: 9px;
     left: 1136px;
-    gap: 0px;
+    gap: 0;
     border-radius: 12px;
     opacity: 1;
     background: #33A3AA;
@@ -339,10 +291,7 @@ form {
     font-weight: 500;
     line-height: 21px;
     text-align: center;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
 }
-
 
 .highlight {
     color: #33A3AA;
@@ -351,8 +300,6 @@ form {
     font-weight: 400;
     line-height: 17px;
     text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
     cursor: pointer;
 }
 
@@ -362,14 +309,11 @@ form {
     font-weight: 400;
     line-height: 17px;
     text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
     width: 385px;
     height: 34px;
     top: 607px;
     left: 908px;
-    gap: 0px;
-    opacity: 0px;
+    gap: 0;
     color: #abaaac;
     margin-top: 15px;
     margin-left: 3px;
@@ -381,41 +325,14 @@ form {
     font-weight: 400;
     line-height: 17px;
     text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
     width: 385px;
     height: 34px;
     top: 607px;
     left: 908px;
-    gap: 0px;
-    opacity: 0px;
+    gap: 0;
     color: #47464A;
     margin-top: 6px;
     margin-left: 1px;
-}
-
-
-.login-small {
-    display: none;
-    background-color: #FFFFFF;
-    width: 393px;
-    height: 852px;
-    top: 550px;
-    left: -720px;
-    gap: 0px;
-    opacity: 0px;
-    margin-top: -50px;
-
-}
-
-.login-small-header {
-    width: 100%;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 40px;
-    
 }
 
 .logo-placeholder {
@@ -423,25 +340,68 @@ form {
     height: 89px;
     top: 96px;
     left: 145px;
-    gap: 0px;
-    opacity: 0px;
+    gap: 0;
     background: #D9D9D9;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-
-
-
-.login-small-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 30px;
-    font-weight: 500;
-    line-height: 45px;
-    letter-spacing: 0.02em;
-    text-align: center;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-    opacity: 1px;
+.eye-button {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
 }
+
+.eye-button svg path {
+    fill: #84818A;
+}
+.form-control.is-invalid ~ .eye-icon {
+    right: 19px;
+  }
+.invalid-feedback {
+    display: none;
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    margin-left: 16px;
+    font-family: 'PP Neue Montreal', sans-serif;
+}
+
+.form-control.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+.paragraph2 {
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    color: #FFFFFF;
+    opacity: 1;
+    z-index: 3;
+    width: 360px;
+    height: 120px;
+    top: 387px;
+    left: 128px;
+    gap: 0;
+}
+
+.wrapper2 {
+    position: absolute;
+    top: 534px;
+    left: 128px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 3;
+}
+

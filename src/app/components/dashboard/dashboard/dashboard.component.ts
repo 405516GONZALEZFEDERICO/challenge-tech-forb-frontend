@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
     standalone: true,
     imports: [NavbarComponent, ReactiveFormsModule, CommonModule],
     templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.css', './dashboard2.component.css']
+    styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit, OnDestroy {
     private dashboardService = inject(DashboardService);
@@ -33,19 +33,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
     lFlag: string = "";
     sCountry: string = "";
     sName: string = "";
-    isPopupVisible?: boolean;
-    isPopupEditVisible?: boolean;
+    searchTerm = new FormControl("");
+
+    isPopupVisible: boolean = false;
+    isPopupEditVisible: boolean = false;
     plant?: Plant;
 
     plantToUpdate: UpdatePlantDto = {
         id: 0,
-        name: '',
-        country: '',
+        name: "",
+        country: "",
         readings: 0,
         medAlerts: 0,
         redAlerts: 0,
         sensorsDisabled: 0,
-        flag: '',
+        flag: "",
         status: false
     };
 
@@ -77,8 +79,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 redAlert: plant.redAlerts,
                 sensor: plant.sensorsDisabled
             });
-        } else {
-            console.error("plantToUpdate no está definido");
         }
     }
 
@@ -94,7 +94,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
             const createSubscription = this.dashboardService.createPlant(formData).subscribe({
                 next: (newPlant) => {
-                    console.log('Planta creada con éxito:', newPlant);
                     this.plantForm.reset();
                     this.closePopup();
 
@@ -102,14 +101,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
                         this.loadPlants();
                         this.calculateTotals();
                     }, 300);
-                },
-                error: (err) => {
-                    console.error('Error al crear la planta', err);
                 }
             });
             this.subscriptions.push(createSubscription);
-        } else {
-            console.log('Formulario no válido');
         }
     }
 
@@ -129,7 +123,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
             const createSubscription = this.dashboardService.updtePlant(formData).subscribe({
                 next: (newPlant) => {
-                    console.log('Planta actualizada con éxito:', newPlant);
                     this.plantFormEdit.reset();
                     this.closePopup();
 
@@ -137,34 +130,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
                         this.loadPlants();
                         this.calculateTotals();
                     }, 300);
-                },
-                error: (err) => {
-                    console.error('Error al actualizar la planta', err);
                 }
             });
             this.subscriptions.push(createSubscription);
-        } else {
-            console.log('Formulario no válido');
         }
     }
 
 
-    onModifyClick(plant: GetPlantFlagDto): void {
-        console.log('Modificar planta:', plant);
-        this.isPopupEditVisible = true;
-        this.loadPlantData(plant);
-
-        this.activeDropdownIndex = null;
-    }
 
     closePopup(): void {
         this.isPopupVisible = false;
         this.isPopupEditVisible = false;
     }
-    onTogglePopCreate() {
+
+
+
+    onTogglePopCreate(): void {
+
         this.isPopupVisible = true;
     }
 
+    onModifyClick(plant: GetPlantFlagDto): void {
+        this.isPopupEditVisible = true;
+        this.loadPlantData(plant);
+        this.activeDropdownIndex = null;
+    }
     @HostListener('document:click', ['$event'])
     closeDropdowns(event: MouseEvent): void {
         if (!event.target || !(event.target as Element).closest('.dropdown')) {
@@ -184,14 +174,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
         const deleteSubscription = this.dashboardService.deletePlant(plant.id).subscribe({
             next: () => {
-                console.log('Planta eliminada con éxito:', plant);
                 setTimeout(() => {
                     this.loadPlants();
                 }, 300);
-            },
-            error: (err) => {
-                console.error('Error al eliminar la planta', err);
             }
+
         });
 
         this.subscriptions.push(deleteSubscription);
@@ -218,11 +205,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         const subscription = this.dashboardService.getPlants().subscribe({
             next: (data) => {
                 this.plants = data;
-                console.log('Plantas cargadas: ', this.plants);
                 this.calculateTotals();
-            },
-            error: () => {
-                console.error('Error al cargar las plantas');
             }
         });
         this.subscriptions.push(subscription);
@@ -233,13 +216,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             next: (data) => {
                 if (Array.isArray(data)) {
                     this.metrics = data;
-                    console.log('Métricas cargadas:', this.metrics);
-                } else {
-                    console.error('Los datos no son un array de métricas');
                 }
-            },
-            error: () => {
-                console.error('Error al cargar las métricas');
             }
         });
         this.subscriptions.push(subscription);
@@ -254,32 +231,38 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.selectedCountryData = this.metrics?.find((metric: CountryEnvironmentalData) =>
             metric.country.toLowerCase() === plant.country.toLowerCase()
         );
-
-        if (this.selectedCountryData) {
-            console.log('Métricas de país:', this.selectedCountryData);
-        } else {
-            console.log('No se encontraron métricas para el país:', plant.country);
-        }
     }
 
     calculateMetrics(nameCountry: string): void {
         this.selectedCountryData = this.metrics?.find((metric: CountryEnvironmentalData) =>
             metric.country.toLowerCase() === nameCountry.toLowerCase()
         );
-
-        if (this.selectedCountryData) {
-            console.log('Métricas de país:', this.selectedCountryData);
-        } else {
-            console.log('No se encontraron métricas para el país:', nameCountry);
-        }
     }
     ngOnInit() {
         this.loadPlants();
         this.calculateTotals();
         this.loadMetrics();
         this.userName = this.authService.getUserNameFromToken();
+        this.filterPlants();
     }
     ngOnDestroy() {
         this.subscriptions.forEach(sub => sub.unsubscribe());
+    }
+
+    filterPlants() {
+        const sub = this.searchTerm.valueChanges.subscribe(search => {
+            const searchTerm = search?.trim().toLocaleLowerCase() || '';
+            if (!this.searchTerm.value) {
+                this.loadPlants()
+            }
+            else {
+                this.plants = this.plants?.filter(plant => {
+                    const name = plant.name.toLocaleLowerCase();
+                    const country = plant.country.toLocaleLowerCase();
+                    return name.includes(searchTerm) || country.includes(searchTerm);
+                })
+            }
+        })
+        this.subscriptions.push(sub);
     }
 }

@@ -6,11 +6,11 @@ import { catchError, map, Observable, of } from 'rxjs';
 export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
-  
+
   if (authService.isAuthenticated()) {
-    return true;
+    return of(true); 
   } 
-  
+
   const refreshToken = authService.getRefreshTokenValidator();
   if (refreshToken && !authService.isTokenExpired(refreshToken)) {
     return authService.refreshToken().pipe(
@@ -21,8 +21,8 @@ export const authGuard: CanActivateFn = (route, state) => {
       })
     );
   }
-  
+
   router.navigate(['/login']);
-  return false;
+  return of(false); 
 }
 

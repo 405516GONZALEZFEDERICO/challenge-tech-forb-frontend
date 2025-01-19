@@ -3,7 +3,7 @@ const BASE_URL = 'https://challenge-back-end.onrender.com/';
 
 const API_METRICS="https://my-json-server.typicode.com/405516GONZALEZFEDERICO/fake-api-metrics/environmentalData";
 export const environment = {
-  production: false,
+  production: true,
   services: {
     login: `${BASE_URL}auth/login`,
     register: `${BASE_URL}auth/register`,

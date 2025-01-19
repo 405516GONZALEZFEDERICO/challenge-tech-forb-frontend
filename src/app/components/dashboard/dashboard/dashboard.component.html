@@ -2,7 +2,7 @@
     <app-navbar></app-navbar>
     <div class="dashboard">
         <div class="main-content">
-            <div class="container-dashboard">
+            <div class="container-dashboard">        
                 <div class="top">
                     <div class="monitoreo-global-text">
                         Monitoreo global
@@ -126,6 +126,7 @@
                         <button class="button-new-plant" (click)="onTogglePopCreate()">
                             <span class="text-button">+ Crear nueva planta</span>
                         </button>
+                        <input type="text" class="search-input"  placeholder="Buscar planta..."  [formControl]="searchTerm"/>
                     </div>
                     <div class="line">
                         <svg width="1222" height="1" viewBox="0 0 1222 1" fill="none"
@@ -270,8 +271,8 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
+                
                 <div class="footer">
                     <div class="footer-container-ta">
                         <div class="text-foot">

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { catchError, Observable, of, tap, throwError } from 'rxjs';
 import { TokenResponseDto, User } from '../../interfaces/auth';
 import { environment } from '../../enviroments/environment.prod';
 
@@ -49,20 +49,12 @@ export class AuthService {
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.API_URL.services.getUsers}`).pipe(
       tap(response => {
-        console.log('Usuarios recibidos:', response); 
       }),
       catchError(error => {
-        const errorMessage = error.error?.message || 'Error al obtener users';
-        return throwError(() => ({
-          status: error.status,
-          error: {
-            message: errorMessage
-          }
-        }));
+        return of([]);
       })
     );
   }
-  
 
 
   
@@ -82,8 +74,7 @@ export class AuthService {
     const expirationDate = new Date(decodedToken.exp * 1000);
     const currentDate = new Date();
 
-    console.log('Token expira:', expirationDate);
-    console.log('Hora actual:', currentDate);
+
 
     return expirationDate <= currentDate;
   }
@@ -99,17 +90,12 @@ export class AuthService {
       headers: { Authorization: `Bearer ${refreshToken}` }
     }).pipe(
       tap(response => {
-        console.log('Nuevo access token:', response.access_token);
-        console.log('Nuevo refresh token:', response.refresh_token);
         this.cookieService.set('access_token', response.access_token, { secure: true, sameSite: 'Strict' });
         this.cookieService.set('refresh_token', response.refresh_token, { secure: true, sameSite: 'Strict' });
         
-        console.log('Token guardado en cookies:', this.cookieService.get('access_token'));
-        console.log('Refresh token guardado en cookies:', this.cookieService.get('refresh_token'));
       })
     );
   }
-
 
 register(userData: { name: string; email: string; password: string }): Observable<TokenResponseDto> {
   return this.http.post<TokenResponseDto>(`${this.API_URL.services.register}`, userData).pipe(

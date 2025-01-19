@@ -10,34 +10,11 @@ import { AuthService } from '../../../services/login-service/auth.service';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  isMenuOpen = false;
-  isMobileView = false;
+
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  ngOnInit() {
-    this.checkScreenSize();
-  }
-
-  @HostListener('window:resize')
-  onResize() {
-    this.checkScreenSize();
-  }
-
-  checkScreenSize() {
-    this.isMobileView = window.innerWidth <= 425;
-    if (!this.isMobileView) {
-      this.isMenuOpen = false;
-    }
-  }
-
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
-
-
   logout() {
-    console.log("Logout clicked");
     this.authService.logout();
     this.router.navigate(['/login']);
   }
